@@ -10,6 +10,7 @@
 //
 
 #include "System.h"
+#include "StateMachine.h"
 #include <stdexcept>
 
 namespace vgl
@@ -43,6 +44,16 @@ namespace vgl
   int System::backingHeight()
   {
     return dimensionsForBackingStore().y;
+  }
+  
+  StateMachine *System::currentStateMachine()
+  {
+    if(!stateMachine)
+    {
+      stateMachine = new StateMachine;
+    }
+    
+    return stateMachine;
   }
   
 }

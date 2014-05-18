@@ -16,6 +16,8 @@
 
 namespace vgl
 {
+  class StateMachine;
+  
   class System
   {
   public:
@@ -40,7 +42,10 @@ namespace vgl
     ///Makes the current GL context current, you must call superclass method
     ///when implementing this method.
     virtual void makeGLContextCurrent();
-    
+
+    ///returns access to the current state machine
+    virtual StateMachine *currentStateMachine();
+
     //Other methods----------------------------------------------------
     
     ///Should be called whenever the screen resizes
@@ -48,9 +53,9 @@ namespace vgl
 
     int backingWidth();
     int backingHeight();
-
-  private:
     
+  private:
+    StateMachine *stateMachine;
   };
 }
 #endif /* defined(__VGLPP_Demo__System__) */

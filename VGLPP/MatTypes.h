@@ -14,6 +14,9 @@
  Fast inline matrix routines needed to avoid using glm in the verto core
  */
 
+#ifndef __VGL_MATTYPES_H
+#define __VGL_MATTYPES_H
+
 #include <math.h>
 #import "Quat.h"
 #import "VecTypes.h"
@@ -430,3 +433,5 @@ MAT_TYPES_INLINE mat3 mat3Make(float m00, float m01, float m02,
 
 //for syntax consistencies between vectypes and mattypes
 #define make_mat3  mat3Make
+
+#endif

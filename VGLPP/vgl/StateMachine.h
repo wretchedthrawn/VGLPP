@@ -12,13 +12,59 @@
 #ifndef __VGLPP__StateMachine__
 #define __VGLPP__StateMachine__
 
+#include <stack>
+#include <memory>
+#include "vgl.h"
 #include "System.h"
+#include "VecTypes.h"
+#include "MatTypes.h"
 
 namespace vgl
 {
+  class BaseState;
+  
+  // Named vertex attributes for mapping VGLEffects logic to client vertex attrib enables
+  typedef enum
+  {
+    VertexAttribPosition,
+    VertexAttribNormal,
+    VertexAttribTangent,
+    VertexAttribColor,
+    VertexAttribTexCoord0,
+  } VertoGLVertexAttrib;
+  
+  class Transform
+  {
+  public:
+    std::stack<mat4> modelviewMatrix;
+    std::stack<mat4> projectionMatrix;
+    std::stack<mat4> textureMatrix;
+  };
+  
   class StateMachine
   {
+  public:
+    ///Access to the current vgl state machine object
+    static StateMachine &machine();
     
+    StateMachine();
+    ~StateMachine();
+    
+    void bindDefaultVAO();
+    void bindTexRectVAO();
+    void bindDefaultFramebuffer();
+
+    //transforms////////////////////////////////
+    void pushModelView();
+    void popModelView();
+    
+  private:
+    //core state
+    std::shared_ptr<BaseState> state;
+    Transform transform;
+    
+    GLuint defaultVAO, texRectVAO;
+    GLuint utilityVBO, utilityVBOs[5], texRectVBOs[2];
   };
 }
 
