@@ -26,7 +26,7 @@ namespace vgl
     inline void setEnabled(GLboolean b) { enabled = b; }
     inline void setPosition(float4 pos) { position = pos; }
     inline void setWorldPosition(float4 pos) { worldPosition = pos; }
-    inline void setAmbient(float4 amb) { ambientColor = /Users/mike/Documents/xcode/VGLPP/VGLPP Demo/VGLPP Demo.xcodeprojamb; }
+    inline void setAmbient(float4 amb) { ambientColor = amb; }
     inline void setDiffuse(float4 diff) { diffuseColor = diff; }
     inline void setSpecular(float4 spec) { specularColor = spec; }
     inline void setSpotDirection(float3 spotDir) { spotDirection = spotDir; };
