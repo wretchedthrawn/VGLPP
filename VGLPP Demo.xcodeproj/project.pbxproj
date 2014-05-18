@@ -9,6 +9,19 @@
 /* Begin PBXBuildFile section */
 		273AD9411929489000CCC07B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD9401929489000CCC07B /* main.cpp */; };
 		273AD9431929489000CCC07B /* VGLPP_Demo.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 273AD9421929489000CCC07B /* VGLPP_Demo.1 */; };
+		273AD94B192949ED00CCC07B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273AD94A192949ED00CCC07B /* SDL2.framework */; };
+		273AD94D19294A0A00CCC07B /* SDL2.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 273AD94A192949ED00CCC07B /* SDL2.framework */; };
+		273AD94F19294C7700CCC07B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273AD94E19294C7700CCC07B /* OpenGL.framework */; };
+		273AD95119294CCA00CCC07B /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273AD95019294CCA00CCC07B /* SDL2_image.framework */; };
+		273AD95B1929514800CCC07B /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD9581929500F00CCC07B /* System.cpp */; };
+		273AD95E192951B400CCC07B /* StateMachine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD95C192951B400CCC07B /* StateMachine.cpp */; };
+		273AD961192951F800CCC07B /* MatTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD95F192951F800CCC07B /* MatTypes.cpp */; };
+		273AD9641929521000CCC07B /* Quat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD9621929521000CCC07B /* Quat.cpp */; };
+		273AD9671929548300CCC07B /* BaseState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD9651929548300CCC07B /* BaseState.cpp */; };
+		273AD96C1929553800CCC07B /* EffectPropertyTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD96A1929553800CCC07B /* EffectPropertyTransform.cpp */; };
+		273AD96F1929567600CCC07B /* EffectPropertyTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD96D1929567600CCC07B /* EffectPropertyTexture.cpp */; };
+		273AD973192957D300CCC07B /* EffectPropertyMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD971192957D300CCC07B /* EffectPropertyMaterial.cpp */; };
+		273AD9761929594300CCC07B /* EffectPropertyLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD9741929594300CCC07B /* EffectPropertyLight.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -22,12 +35,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		273AD94C192949FF00CCC07B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				273AD94D19294A0A00CCC07B /* SDL2.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		273AD93D1929489000CCC07B /* VGLPP Demo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "VGLPP Demo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		273AD9401929489000CCC07B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		273AD9421929489000CCC07B /* VGLPP_Demo.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = VGLPP_Demo.1; sourceTree = "<group>"; };
+		273AD94A192949ED00CCC07B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = "mac frameworks/SDL2.framework"; sourceTree = "<group>"; };
+		273AD94E19294C7700CCC07B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		273AD95019294CCA00CCC07B /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = "mac frameworks/SDL2_image.framework"; sourceTree = "<group>"; };
+		273AD9581929500F00CCC07B /* System.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = System.cpp; sourceTree = "<group>"; };
+		273AD9591929500F00CCC07B /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
+		273AD95A1929501300CCC07B /* VecTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VecTypes.h; sourceTree = "<group>"; };
+		273AD95C192951B400CCC07B /* StateMachine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StateMachine.cpp; sourceTree = "<group>"; };
+		273AD95D192951B400CCC07B /* StateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateMachine.h; sourceTree = "<group>"; };
+		273AD95F192951F800CCC07B /* MatTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MatTypes.cpp; sourceTree = "<group>"; };
+		273AD960192951F800CCC07B /* MatTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatTypes.h; sourceTree = "<group>"; };
+		273AD9621929521000CCC07B /* Quat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quat.cpp; sourceTree = "<group>"; };
+		273AD9631929521000CCC07B /* Quat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quat.h; sourceTree = "<group>"; };
+		273AD9651929548300CCC07B /* BaseState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseState.cpp; sourceTree = "<group>"; };
+		273AD9661929548300CCC07B /* BaseState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseState.h; sourceTree = "<group>"; };
+		273AD96A1929553800CCC07B /* EffectPropertyTransform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectPropertyTransform.cpp; sourceTree = "<group>"; };
+		273AD96B1929553800CCC07B /* EffectPropertyTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectPropertyTransform.h; sourceTree = "<group>"; };
+		273AD96D1929567600CCC07B /* EffectPropertyTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectPropertyTexture.cpp; sourceTree = "<group>"; };
+		273AD96E1929567600CCC07B /* EffectPropertyTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectPropertyTexture.h; sourceTree = "<group>"; };
+		273AD970192956C500CCC07B /* vgl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vgl.h; sourceTree = "<group>"; };
+		273AD971192957D300CCC07B /* EffectPropertyMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectPropertyMaterial.cpp; sourceTree = "<group>"; };
+		273AD972192957D300CCC07B /* EffectPropertyMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectPropertyMaterial.h; sourceTree = "<group>"; };
+		273AD9741929594300CCC07B /* EffectPropertyLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectPropertyLight.cpp; sourceTree = "<group>"; };
+		273AD9751929594300CCC07B /* EffectPropertyLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectPropertyLight.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +81,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				273AD95119294CCA00CCC07B /* SDL2_image.framework in Frameworks */,
+				273AD94F19294C7700CCC07B /* OpenGL.framework in Frameworks */,
+				273AD94B192949ED00CCC07B /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,7 +93,9 @@
 		273AD9341929489000CCC07B = {
 			isa = PBXGroup;
 			children = (
+				273AD95319294CF300CCC07B /* VGLPP */,
 				273AD93F1929489000CCC07B /* VGLPP Demo */,
+				273AD949192949E200CCC07B /* Frameworks */,
 				273AD93E1929489000CCC07B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,6 +117,67 @@
 			path = "VGLPP Demo";
 			sourceTree = "<group>";
 		};
+		273AD949192949E200CCC07B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				273AD95019294CCA00CCC07B /* SDL2_image.framework */,
+				273AD94E19294C7700CCC07B /* OpenGL.framework */,
+				273AD94A192949ED00CCC07B /* SDL2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		273AD95319294CF300CCC07B /* VGLPP */ = {
+			isa = PBXGroup;
+			children = (
+				273AD9571929500F00CCC07B /* vgl */,
+				273AD95A1929501300CCC07B /* VecTypes.h */,
+				273AD960192951F800CCC07B /* MatTypes.h */,
+				273AD95F192951F800CCC07B /* MatTypes.cpp */,
+				273AD9631929521000CCC07B /* Quat.h */,
+				273AD9621929521000CCC07B /* Quat.cpp */,
+				273AD970192956C500CCC07B /* vgl.h */,
+			);
+			path = VGLPP;
+			sourceTree = "<group>";
+		};
+		273AD9571929500F00CCC07B /* vgl */ = {
+			isa = PBXGroup;
+			children = (
+				273AD9681929551F00CCC07B /* Effect Property Classes */,
+				273AD9691929551F00CCC07B /* VGL System Effects */,
+				273AD9581929500F00CCC07B /* System.cpp */,
+				273AD9591929500F00CCC07B /* System.h */,
+				273AD95C192951B400CCC07B /* StateMachine.cpp */,
+				273AD95D192951B400CCC07B /* StateMachine.h */,
+				273AD9651929548300CCC07B /* BaseState.cpp */,
+				273AD9661929548300CCC07B /* BaseState.h */,
+			);
+			path = vgl;
+			sourceTree = "<group>";
+		};
+		273AD9681929551F00CCC07B /* Effect Property Classes */ = {
+			isa = PBXGroup;
+			children = (
+				273AD96A1929553800CCC07B /* EffectPropertyTransform.cpp */,
+				273AD96B1929553800CCC07B /* EffectPropertyTransform.h */,
+				273AD96D1929567600CCC07B /* EffectPropertyTexture.cpp */,
+				273AD96E1929567600CCC07B /* EffectPropertyTexture.h */,
+				273AD971192957D300CCC07B /* EffectPropertyMaterial.cpp */,
+				273AD972192957D300CCC07B /* EffectPropertyMaterial.h */,
+				273AD9741929594300CCC07B /* EffectPropertyLight.cpp */,
+				273AD9751929594300CCC07B /* EffectPropertyLight.h */,
+			);
+			path = "Effect Property Classes";
+			sourceTree = "<group>";
+		};
+		273AD9691929551F00CCC07B /* VGL System Effects */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "VGL System Effects";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -76,6 +188,7 @@
 				273AD9391929489000CCC07B /* Sources */,
 				273AD93A1929489000CCC07B /* Frameworks */,
 				273AD93B1929489000CCC07B /* CopyFiles */,
+				273AD94C192949FF00CCC07B /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -117,7 +230,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				273AD9671929548300CCC07B /* BaseState.cpp in Sources */,
+				273AD973192957D300CCC07B /* EffectPropertyMaterial.cpp in Sources */,
+				273AD9761929594300CCC07B /* EffectPropertyLight.cpp in Sources */,
+				273AD961192951F800CCC07B /* MatTypes.cpp in Sources */,
+				273AD95B1929514800CCC07B /* System.cpp in Sources */,
 				273AD9411929489000CCC07B /* main.cpp in Sources */,
+				273AD95E192951B400CCC07B /* StateMachine.cpp in Sources */,
+				273AD96F1929567600CCC07B /* EffectPropertyTexture.cpp in Sources */,
+				273AD9641929521000CCC07B /* Quat.cpp in Sources */,
+				273AD96C1929553800CCC07B /* EffectPropertyTransform.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +319,16 @@
 		273AD9471929489000CCC07B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/mac",
+					frameworks,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/mac frameworks/SDL2.framework/Headers\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -204,6 +336,16 @@
 		273AD9481929489000CCC07B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/mac",
+					frameworks,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/mac frameworks/SDL2.framework/Headers\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
