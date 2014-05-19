@@ -47,6 +47,7 @@ namespace vgl
     inline GLboolean isLightingEnabled() { return lightingEnabled; }
     
     std::shared_ptr<EffectPropertyLight> lightAtIndex(unsigned int index);
+    inline const std::vector<std::shared_ptr<EffectPropertyLight> > &getLights() { return lights; }
 
     BaseState();
 

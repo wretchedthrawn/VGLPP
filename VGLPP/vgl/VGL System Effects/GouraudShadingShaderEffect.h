@@ -13,7 +13,10 @@
 #define __VGLPP_Demo__GouraudShadingShaderEffect__
 
 #include <map>
+#include <string>
 #include "ShaderEffect.h"
+
+using std::string;
 
 namespace vgl
 {
@@ -27,6 +30,11 @@ namespace vgl
     void setLightingVeryDirty();
 
   private:
+    
+    string genFragmentShaderForTextureMode(bool tex);
+    string genVertexShaderForTextureMode(bool tex);
+    bool updateVertexShaderForLightingAndTextureMode(bool tex);
+    
     GLuint shaderProgramTex;
     
     float pointSize;

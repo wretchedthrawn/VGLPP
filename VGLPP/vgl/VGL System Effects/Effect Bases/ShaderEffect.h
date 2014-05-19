@@ -124,7 +124,7 @@ namespace vgl
 
     void setPreLinkStep(std::function<void ()> &pls);
     
-  private:
+  protected:
     std::shared_ptr<BaseState> state;
     
     GLuint shaderProgram;
