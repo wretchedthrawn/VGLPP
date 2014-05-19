@@ -67,21 +67,21 @@ namespace vgl
     virtual void prepareToDraw();
     virtual void prepareToDrawFromState(StateMachine *machine);
     
-    void setAllDirty();
-    void setTransformDirty();
-    void setTextureTransformDirty();
-    void setMaterialAmbientDirty();
-    void setMaterialDiffuseDirty();
-    void setMaterialSpecularDirty();
-    void setMaterialEmissiveDirty();
-    void setMaterialShininessDirty();
-    void setLightDirty(unsigned int light);
-    void setTextureDirty(unsigned int texture);
-    void setFogDirty();
-    void setConstantColorDirty();
-    void setRenderTargetDirty();
-    void setTimeDirty();
-    void setMiscDirty();
+    virtual void setAllDirty();
+    virtual void setTransformDirty();
+    virtual void setTextureTransformDirty();
+    virtual void setMaterialAmbientDirty();
+    virtual void setMaterialDiffuseDirty();
+    virtual void setMaterialSpecularDirty();
+    virtual void setMaterialEmissiveDirty();
+    virtual void setMaterialShininessDirty();
+    virtual void setLightDirty(unsigned int light);
+    virtual void setTextureDirty(unsigned int texture);
+    virtual void setFogDirty();
+    virtual void setConstantColorDirty();
+    virtual void setRenderTargetDirty();
+    virtual void setTimeDirty();
+    virtual void setMiscDirty();
     
     bool compileShader(GLuint *shader, GLenum type, const string &src);
     bool recompileShader(GLuint *shader, GLenum type, string src);

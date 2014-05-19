@@ -57,6 +57,13 @@ namespace vgl
     void bindDefaultVAO();
     void bindTexRectVAO();
     void bindDefaultFramebuffer();
+    
+    //Shaders and effects///////////////////////
+    
+    ///Used to efficiently determine the last bound GL shader program
+    GLuint getCurrentShaderProgram();
+    void useShaderProgram(GLuint shaderProgram);
+
 
     //transforms////////////////////////////////
     void pushModelView();
@@ -67,6 +74,8 @@ namespace vgl
     shared_ptr<BaseState> state;
     Transform transform;
     
+    GLuint currentShaderProgram;
+
     GLuint defaultVAO, texRectVAO;
     GLuint utilityVBO, utilityVBOs[5], texRectVBOs[2];
   };

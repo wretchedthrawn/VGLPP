@@ -92,6 +92,21 @@ namespace vgl
   {
     System::system().bindDefaultFramebuffer();
   }
+  
+  GLuint StateMachine::getCurrentShaderProgram()
+  {
+    return currentShaderProgram;
+  }
+  
+  void StateMachine::useShaderProgram(GLuint shaderProgram)
+  {
+    //Efficiently only change GL state when necessary
+    if(currentShaderProgram != shaderProgram)
+    {
+      currentShaderProgram = shaderProgram;
+      glUseProgram(shaderProgram);
+    }
+  }
 
   void StateMachine::pushModelView()
   {

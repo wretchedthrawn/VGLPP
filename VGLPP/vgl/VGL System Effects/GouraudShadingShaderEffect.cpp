@@ -9,8 +9,10 @@
 //  using this software at YOUR OWN RISK.
 //
 
+#include <iostream>
 #include <fstream>
 #include <sstream>
+#include <math.h>
 #include "GouraudShadingShaderEffect.h"
 #include "FastLightingShaderSource.h"
 
@@ -24,6 +26,8 @@ using namespace std;
 
 namespace vgl
 {
+  static inline float RAD(float n)  { return (n * (M_PI/180.0f)); }
+
   static string stringWithContentsOfFile(const string &file)
   {
     string ret;
@@ -234,7 +238,195 @@ namespace vgl
   }
   
   
+  bool GouraudShadingShaderEffect::updateVertexShaderForLightingAndTextureMode(bool tex)
+  {
+#ifdef DEBUG
+    cout << "Recompiling gouraud lighting shader due to changed lighting state" << endl;
+#endif
+    
+    string vertexShader = genFragmentShaderForTextureMode(tex);
+    GLuint *shader = (tex) ? &shadersTex[0] : &shaders[0];
+    GLuint program = (tex) ? shaderProgramTex : shaderProgram;
+    auto &lookup = (tex) ? uniformLookupTableTex : uniformLookupTable;
+    
+    if(recompileShader(shader, GL_VERTEX_SHADER, vertexShader))
+    {
+      // Bind attribute locations.
+      // This needs to be done prior to linking.
+      glBindAttribLocation(program, VertexAttribPosition, "position");
+      if(useFullVertexAttribs)
+      {
+        glBindAttribLocation(program, VertexAttribNormal, "normal");
+        glBindAttribLocation(program, VertexAttribTexCoord0, "texcoord0");
+      }
+    }
+    
+    //re-link program
+    if(!linkProgram(program))
+    {
+      cerr << "Failed to link program: " << program << endl;
+    }
+    
+    lookup.clear();
+    dirtyStateFlags = DS_ALL;
+    return true;
+  }
   
+  bool GouraudShadingShaderEffect::updateVertexShaderForLighting()
+  {
+    updateVertexShaderForLightingAndTextureMode(false);
+    updateVertexShaderForLightingAndTextureMode(true);
+    
+    return true;
+  }
 
+  void GouraudShadingShaderEffect::prepareToDrawFromState(StateMachine *machine)
+  {
+    ShaderEffect::prepareToDrawFromState(machine);
+    
+    if(lightingRecompilationDirtyFlags)
+    {
+      if(updateVertexShaderForLighting())
+        lightingRecompilationDirtyFlags = 0;
+    }
+    
+    GLint loc = 0;
+    GLuint shaderProgTmp = shaderProgram;
+    auto &uniformLookupTableTmp = uniformLookupTable;
+    
+    if(state->getTexture0()->isEnabled())
+    {
+      shaderProgram = shaderProgramTex;
+      uniformLookupTable = uniformLookupTableTex;
+    }
+    
+    if(machine)
+      machine->useShaderProgram(shaderProgram);
+    else
+      glUseProgram(shaderProgram);
+    
+    if(dirtyStateFlags & DS_MISC_FLAGS)
+    {
+    }
+    
+    //Set transform
+    if(dirtyStateFlags & DS_TRANSFORM)
+    {
+      mat3 normalMatrix = mat3InvertAndTranspose(mat4GetMatrix3(state->getTransform()->getModelviewMatrix()), NULL);
+      mat4 modelViewProjectionMatrix = mat4Multiply(state->getTransform()->getProjectionMatrix(), state->getTransform()->getModelviewMatrix());
+      
+      loc = getUniformLocation("modelViewProjectionMatrix");
+      if(loc >= 0)
+        glUniformMatrix4fv(loc, 1, 0, modelViewProjectionMatrix.m);
+      
+      loc = getUniformLocation("modelViewMatrix");
+      if(loc >= 0)
+        glUniformMatrix4fv(loc, 1, 0, state->getTransform()->getModelviewMatrix().m);
+      
+      loc = getUniformLocation("normalMatrix");
+      if(loc >= 0)
+        glUniformMatrix3fv(loc, 1, 0, normalMatrix.m);
+    }
+    if(dirtyStateFlags & DS_TRANSFORM_TEXTURE && state->getTexture0()->isEnabled())
+    {
+      mat4 tm = state->getTextureTransformMatrix();
+      float2 scale = make_float2(tm.m[0], tm.m[5]);
+      
+      setShaderUniform("textureScale", scale, shaderProgram);
+    }
+    
+    //materials are pre-multiplied with light state.
+    if(dirtyStateFlags & DS_MAT_DIFFUSE)
+    {
+      //[self setShaderUniform:@"material.diffuse" toVector4:material.diffuseColor forProgram:shaderProgram];
+      setShaderUniform("material.alpha", state->getMaterial()->getDiffuse().a, shaderProgram);
+    }
+    if(dirtyStateFlags & DS_MAT_SHINY)
+    {
+      GLfloat shin = state->getMaterial()->getShininess();
+      
+      //hack to get rid of ugly artifacts in fragment shader since removing specular if-branch for performance
+      if(shin == 0.0f)
+        shin = 0.1f;
+      setShaderUniform("material.shininess", shin, shaderProgram);
+    }
+    
+    //Set light
+    int i = 0;
+    for(auto light : state->getLights())
+    {
+      ostringstream ostr;
+      ostr << "lights[" << i << "].";
+      string prefix = ostr.str();
+
+      if(builtLightFlags & (DS_LIGHT0<<i))
+      {
+        if(dirtyStateFlags & (DS_LIGHT0<<i))
+        {
+          float3 attenv = light->getAttenuation();
+          
+          setShaderUniform(prefix+"position", light->getPosition(), shaderProgram);
+          setShaderUniform(prefix+"spotDirection", light->getSpotDirection(), shaderProgram);
+          setShaderUniform(prefix+"spotExponent", light->getSpotExponent(), shaderProgram);
+          setShaderUniform(prefix+"spotCosCutoff", cosf(RAD(light->getSpotCutoff())), shaderProgram);
+
+          setShaderUniform(prefix+"constantAttenuation", attenv.x, shaderProgram);
+          setShaderUniform(prefix+"linearAttenuation", attenv.y, shaderProgram);
+          setShaderUniform(prefix+"quadraticAttenuation", attenv.z, shaderProgram);
+        }
+        
+        if(dirtyStateFlags & (DS_LIGHT0<<i) || (dirtyStateFlags & DS_MAT_AMBIENT))
+        {
+          setShaderUniform(prefix+"ambient", float4Multiply(light->getAmbient(), state->getMaterial()->getAmbient()), shaderProgram);
+        }
+        
+        if(dirtyStateFlags & (DS_LIGHT0<<i) || (dirtyStateFlags & DS_MAT_DIFFUSE))
+        {
+          setShaderUniform(prefix+"diffuse", float4Multiply(light->getDiffuse(), state->getMaterial()->getDiffuse()), shaderProgram);
+        }
+        
+        if(dirtyStateFlags & (DS_LIGHT0<<i) || (dirtyStateFlags & DS_MAT_SPECULAR))
+        {
+          float4 mult = float4Multiply(light->getSpecular(), state->getMaterial()->getSpecular());
+          setShaderUniform(prefix+"specular", mult, shaderProgram);
+        }
+      }
+      
+      
+      i++;
+    }
+    
+    if(dirtyStateFlags & DS_MAT_EMISSIVE || dirtyStateFlags & DS_MAT_AMBIENT)
+    {
+      float4 ambientProduct = float4Multiply(state->getLightModelAmbientColor(), state->getMaterial()->getAmbient());
+      float4 lightModelProductSceneColor = float4Add(state->getMaterial()->getEmissive(), ambientProduct);
+      setShaderUniform("lightModelProductSceneColor", lightModelProductSceneColor, shaderProgram);
+    }
+    
+    uniformLookupTable = uniformLookupTableTmp;
+    shaderProgram = shaderProgTmp;
+    dirtyStateFlags = 0;
+  }
+
+  void GouraudShadingShaderEffect::setLightingVeryDirty()
+  {
+    lightingRecompilationDirtyFlags = 0xffffffff;
+  }
+  
+  void GouraudShadingShaderEffect::setPointSize(float p)
+  {
+    pointSize = p;
+    dirtyStateFlags |= DS_MISC_FLAGS;
+  }
+  
+  //more of a big deal for this shader
+  void GouraudShadingShaderEffect::setTextureDirty(unsigned int texture)
+  {
+    if(texture == 0)
+    {
+      dirtyStateFlags = DS_ALL;
+    }
+  }
+  
   
 }

@@ -26,6 +26,11 @@ namespace vgl
     GouraudShadingShaderEffect();
     virtual ~GouraudShadingShaderEffect();
     
+    virtual void prepareToDrawFromState(StateMachine *machine);
+    virtual void setTextureDirty(unsigned int texture);
+    
+    void setPointSize(float p);
+    
     /// Causes a full recompilation of lighting shader state.
     void setLightingVeryDirty();
 
@@ -34,6 +39,7 @@ namespace vgl
     string genFragmentShaderForTextureMode(bool tex);
     string genVertexShaderForTextureMode(bool tex);
     bool updateVertexShaderForLightingAndTextureMode(bool tex);
+    bool updateVertexShaderForLighting();
     
     GLuint shaderProgramTex;
     
