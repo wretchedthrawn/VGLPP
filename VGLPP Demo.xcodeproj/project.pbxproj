@@ -22,6 +22,10 @@
 		273AD96F1929567600CCC07B /* EffectPropertyTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD96D1929567600CCC07B /* EffectPropertyTexture.cpp */; };
 		273AD973192957D300CCC07B /* EffectPropertyMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD971192957D300CCC07B /* EffectPropertyMaterial.cpp */; };
 		273AD9761929594300CCC07B /* EffectPropertyLight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD9741929594300CCC07B /* EffectPropertyLight.cpp */; };
+		273AD977192965A100CCC07B /* SDL2_image.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 273AD95019294CCA00CCC07B /* SDL2_image.framework */; };
+		273AD97B1929739600CCC07B /* ShaderEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD9791929739600CCC07B /* ShaderEffect.cpp */; };
+		273AD97E1929752400CCC07B /* ShaderUniformInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD97C1929752400CCC07B /* ShaderUniformInfo.cpp */; };
+		273AD98119298DA300CCC07B /* GouraudShadingShaderEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD97F19298DA300CCC07B /* GouraudShadingShaderEffect.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +45,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				273AD977192965A100CCC07B /* SDL2_image.framework in CopyFiles */,
 				273AD94D19294A0A00CCC07B /* SDL2.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,6 +79,12 @@
 		273AD972192957D300CCC07B /* EffectPropertyMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectPropertyMaterial.h; sourceTree = "<group>"; };
 		273AD9741929594300CCC07B /* EffectPropertyLight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectPropertyLight.cpp; sourceTree = "<group>"; };
 		273AD9751929594300CCC07B /* EffectPropertyLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectPropertyLight.h; sourceTree = "<group>"; };
+		273AD9791929739600CCC07B /* ShaderEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderEffect.cpp; sourceTree = "<group>"; };
+		273AD97A1929739600CCC07B /* ShaderEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderEffect.h; sourceTree = "<group>"; };
+		273AD97C1929752400CCC07B /* ShaderUniformInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderUniformInfo.cpp; sourceTree = "<group>"; };
+		273AD97D1929752400CCC07B /* ShaderUniformInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderUniformInfo.h; sourceTree = "<group>"; };
+		273AD97F19298DA300CCC07B /* GouraudShadingShaderEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GouraudShadingShaderEffect.cpp; sourceTree = "<group>"; };
+		273AD98019298DA300CCC07B /* GouraudShadingShaderEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GouraudShadingShaderEffect.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +163,8 @@
 				273AD95D192951B400CCC07B /* StateMachine.h */,
 				273AD9651929548300CCC07B /* BaseState.cpp */,
 				273AD9661929548300CCC07B /* BaseState.h */,
+				273AD97C1929752400CCC07B /* ShaderUniformInfo.cpp */,
+				273AD97D1929752400CCC07B /* ShaderUniformInfo.h */,
 			);
 			path = vgl;
 			sourceTree = "<group>";
@@ -174,8 +187,20 @@
 		273AD9691929551F00CCC07B /* VGL System Effects */ = {
 			isa = PBXGroup;
 			children = (
+				273AD9781929737E00CCC07B /* Effect Bases */,
+				273AD97F19298DA300CCC07B /* GouraudShadingShaderEffect.cpp */,
+				273AD98019298DA300CCC07B /* GouraudShadingShaderEffect.h */,
 			);
 			path = "VGL System Effects";
+			sourceTree = "<group>";
+		};
+		273AD9781929737E00CCC07B /* Effect Bases */ = {
+			isa = PBXGroup;
+			children = (
+				273AD9791929739600CCC07B /* ShaderEffect.cpp */,
+				273AD97A1929739600CCC07B /* ShaderEffect.h */,
+			);
+			path = "Effect Bases";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,10 +259,13 @@
 				273AD973192957D300CCC07B /* EffectPropertyMaterial.cpp in Sources */,
 				273AD9761929594300CCC07B /* EffectPropertyLight.cpp in Sources */,
 				273AD961192951F800CCC07B /* MatTypes.cpp in Sources */,
+				273AD97B1929739600CCC07B /* ShaderEffect.cpp in Sources */,
 				273AD95B1929514800CCC07B /* System.cpp in Sources */,
 				273AD9411929489000CCC07B /* main.cpp in Sources */,
 				273AD95E192951B400CCC07B /* StateMachine.cpp in Sources */,
+				273AD98119298DA300CCC07B /* GouraudShadingShaderEffect.cpp in Sources */,
 				273AD96F1929567600CCC07B /* EffectPropertyTexture.cpp in Sources */,
+				273AD97E1929752400CCC07B /* ShaderUniformInfo.cpp in Sources */,
 				273AD9641929521000CCC07B /* Quat.cpp in Sources */,
 				273AD96C1929553800CCC07B /* EffectPropertyTransform.cpp in Sources */,
 			);

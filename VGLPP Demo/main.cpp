@@ -122,7 +122,7 @@ int main(int argc, const char *argv[])
     exit(2);
   }
   
-  cout << "Created " << glGetString(GL_VERSION) << " context" << endl;
+  cout << "Created OpenGL " << glGetString(GL_VERSION) << " context" << endl;
   
   SDL_GetWindowSize(window, &screenW, &screenH);
   SDL_GL_SetSwapInterval(1);

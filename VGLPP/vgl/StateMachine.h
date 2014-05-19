@@ -19,6 +19,8 @@
 #include "VecTypes.h"
 #include "MatTypes.h"
 
+using std::shared_ptr;
+
 namespace vgl
 {
   class BaseState;
@@ -50,6 +52,8 @@ namespace vgl
     StateMachine();
     ~StateMachine();
     
+    inline shared_ptr<BaseState> getState() { return state; }
+    
     void bindDefaultVAO();
     void bindTexRectVAO();
     void bindDefaultFramebuffer();
@@ -60,7 +64,7 @@ namespace vgl
     
   private:
     //core state
-    std::shared_ptr<BaseState> state;
+    shared_ptr<BaseState> state;
     Transform transform;
     
     GLuint defaultVAO, texRectVAO;
