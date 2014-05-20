@@ -1,5 +1,8 @@
 //
 //  VGLPP
+//  A very limited port of the Verto Core GL Layer from Verto Studio to C++
+//  http://vertostudio.com
+//
 //
 //  This code comes at absolutely NO WARRANTY.
 //  The author accepts no liability whatsoever for any effects,
@@ -9,6 +12,7 @@
 //  using this software at YOUR OWN RISK.
 //
 
+#include <iostream>
 #include <stdexcept>
 #include "StateMachine.h"
 #include "ShaderEffect.h"
@@ -20,7 +24,7 @@ using namespace std;
 
 namespace vgl
 {
-  //static inline float RAD(float n)  { return (n * (M_PI/180.0f)); }
+  static inline float RAD(float n)  { return (n * (M_PI/180.0f)); }
   //static inline float DEG(float n)  { return (n * (180.0f/M_PI)); }
   
   static const float2 texRect[4] =
@@ -144,7 +148,7 @@ namespace vgl
     transform.modelviewMatrix.push(transform.modelviewMatrix.top());
 #ifdef DEBUG
     if(transform.modelviewMatrix.size() > 32)
-      throw runtime_error("modelview transorm stack overflow");
+      throw runtime_error("modelview transform stack overflow");
 #endif
   }
   
@@ -160,6 +164,14 @@ namespace vgl
     state->getTransform()->setProjectionMatrix(transform.projectionMatrix.top());
 
     shaderEffect->setTransformDirty();
+  }
+
+  void StateMachine::updateTextureMatrixState()
+  {
+    mat4 &tm = transform.textureMatrix.top();
+    state->setTextureTransformMatrix(tm);
+
+    shaderEffect->setTextureTransformDirty();
   }
 
   void StateMachine::setDiffuseMaterialColor(float4 diff)
@@ -300,6 +312,121 @@ namespace vgl
       gouraud->setLightingVeryDirty();
     }
   }
+
+  void StateMachine::modelViewLoadIdentity()
+  {
+    transform.modelviewMatrix.top() = mat4Identity;
+    updateMatrixState();
+  }
+  
+  void StateMachine::transformf(const mat4 &matrix)
+  {
+    transform.modelviewMatrix.top() = mat4Multiply(transform.modelviewMatrix.top(), matrix);
+    updateMatrixState();
+  }
+  
+  void StateMachine::transformf(const GLfloat *matrix)
+  {
+    mat4 mat = mat4MakeWithArray((float *)matrix);
+    transformf(mat);
+  }
+  
+  void StateMachine::translate(float3 trans)
+  {
+    transform.modelviewMatrix.top() = mat4Translate(transform.modelviewMatrix.top(), trans.x, trans.y, trans.z);
+    updateMatrixState();
+  }
+  
+  void StateMachine::scale(float3 scale)
+  {
+    transform.modelviewMatrix.top() = mat4Scale(transform.modelviewMatrix.top(), scale.x, scale.y, scale.z);
+    updateMatrixState();
+  }
+  
+  void StateMachine::rotate(float ang, float3 normalizedVector)
+  {
+    transform.modelviewMatrix.top() = mat4RotateWithVector3(transform.modelviewMatrix.top(), RAD(ang),
+                                                            make_float3(normalizedVector.x, normalizedVector.y, normalizedVector.z));
+    updateMatrixState();
+  }
+
+  void StateMachine::lookAt(float3 point, float3 viewer, float3 up)
+  {
+    transform.modelviewMatrix.top() = mat4MakeLookAt(viewer.x, viewer.y, viewer.z, point.x, point.y, point.z, up.x, up.y, up.z);
+    updateMatrixState();
+  }
+  
+  void StateMachine::pushTextureMatrix()
+  {
+    transform.textureMatrix.push(transform.textureMatrix.top());
+#ifdef DEBUG
+    if(transform.textureMatrix.size() > 10)
+      throw runtime_error("texture transform stack overflow");
+#endif
+  }
+  
+  void StateMachine::popTextureMatrix()
+  {
+    transform.textureMatrix.pop();
+    if(transform.textureMatrix.size() == 0)
+    {
+      cerr << "** Warning: underflow of texture matrix stack!!!!" << endl;
+      return;
+    }
+    updateMatrixState();
+  }
+  
+  void StateMachine::textureMatrixLoadIdentity()
+  {
+    transform.textureMatrix.top() = mat4Identity;
+    updateMatrixState();
+  }
+  
+  void StateMachine::textureTranslate(float2 trans)
+  {
+    transform.textureMatrix.top() = mat4Translate(transform.textureMatrix.top(), trans.x, trans.y, 0);
+    updateMatrixState();
+  }
+  
+  void StateMachine::textureScale(float2 scale)
+  {
+    transform.textureMatrix.top() = mat4Scale(transform.textureMatrix.top(), scale.x, scale.y, 1);
+    updateMatrixState();
+  }
+  
+  void StateMachine::textureRotate(float angle)
+  {
+    transform.textureMatrix.top() = mat4Rotate(transform.textureMatrix.top(), RAD(angle), 0, 0, 1);
+    updateMatrixState();
+  }
+  
+  void StateMachine::pushProjection()
+  {
+    transform.projectionMatrix.push(transform.projectionMatrix.top());
+#ifdef DEBUG
+    if(transform.projectionMatrix.size() > 10)
+      throw runtime_error("projection transform stack overflow");
+#endif
+  }
+  
+  void StateMachine::popProjection()
+  {
+    transform.projectionMatrix.pop();
+    updateMatrixState();
+  }
+  
+  void StateMachine::ortho2D(float left, float right, float bottom, float top, float znear, float zfar)
+  {
+    transform.projectionMatrix.top() = mat4MakeOrtho(left, right, bottom, top, znear, zfar);
+    updateMatrixState();
+  }
+  
+  void StateMachine::perspective(float fovy, float aspect, float znear, float zfar)
+  {
+    transform.projectionMatrix.top() = mat4MakePerspective(RAD(fovy), aspect, znear, zfar);
+    updateMatrixState();
+  }
+  
 
   
 }

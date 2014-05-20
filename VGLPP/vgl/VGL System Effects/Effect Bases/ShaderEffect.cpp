@@ -1,5 +1,8 @@
 //
 //  VGLPP
+//  A very limited port of the Verto Core GL Layer from Verto Studio to C++
+//  http://vertostudio.com
+//
 //
 //  This code comes at absolutely NO WARRANTY.
 //  The author accepts no liability whatsoever for any effects,
@@ -22,6 +25,7 @@ namespace vgl
 {
   ShaderEffect::ShaderEffect() : shaderProgram(0), useFullVertexAttribs(GL_FALSE)
   {
+    //obtain a reference to the state machine's state
     state = StateMachine::machine().getState();
     
     //initially all 1's

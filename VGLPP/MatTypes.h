@@ -1,6 +1,9 @@
 
 //
 //  VGLPP
+//  A very limited port of the Verto Core GL Layer from Verto Studio to C++
+//  http://vertostudio.com
+//
 //
 //  This code comes at absolutely NO WARRANTY.
 //  The author accepts no liability whatsoever for any effects,

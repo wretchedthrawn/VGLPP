@@ -1,5 +1,8 @@
 //
 //  VGLPP
+//  A very limited port of the Verto Core GL Layer from Verto Studio to C++
+//  http://vertostudio.com
+//
 //
 //  This code comes at absolutely NO WARRANTY.
 //  The author accepts no liability whatsoever for any effects,
@@ -75,6 +78,26 @@ namespace vgl
     void pushModelView();
     void popModelView();
     
+    void modelViewLoadIdentity();
+    void transformf(const mat4 &matrix);
+    void transformf(const GLfloat *matrix);
+    void translate(float3 trans);
+    void scale(float3 scale);
+    void rotate(float ang, float3 normalizedVector);
+    void lookAt(float3 point, float3 viewer, float3 up);
+    
+    void pushProjection();
+    void popProjection();
+    void ortho2D(float left, float right, float bottom, float top, float znear=-1.0f, float zfar=1.0f);
+    void perspective(float fovy, float aspect, float znear, float zfar);
+    
+    void pushTextureMatrix();
+    void popTextureMatrix();
+    void textureMatrixLoadIdentity();
+    void textureTranslate(float2 trans);
+    void textureScale(float2 scale);
+    void textureRotate(float angle);
+    
     //materials/////////////////////////////////
     void setDiffuseMaterialColor(float4 diff);
     void setAmbientMaterialColor(float4 amb);
@@ -96,6 +119,7 @@ namespace vgl
   private:
     
     void updateMatrixState();
+    void updateTextureMatrixState();
     
     //core state
     shared_ptr<BaseState> state;
