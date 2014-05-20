@@ -42,6 +42,9 @@ namespace vgl
 
     inline float4 getLightModelAmbientColor() { return lightModelAmbientColor; }
     inline void setLightModelAmbientColor(float4 color) { lightModelAmbientColor = color; }
+    
+    inline float4 getConstantColor() { return constantColor; }
+    inline void setConstantColor(float4 color) { constantColor = color; }
 
     inline void setLightingEnabled(GLboolean b) { lightingEnabled = b; }
     inline GLboolean isLightingEnabled() { return lightingEnabled; }
@@ -68,6 +71,7 @@ namespace vgl
     //Texture
     std::shared_ptr<EffectPropertyTexture> texture0;
     
+    float4 constantColor;
     float4 lightModelAmbientColor;
   };
 }

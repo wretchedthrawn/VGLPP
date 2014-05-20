@@ -26,6 +26,7 @@
 		273AD97B1929739600CCC07B /* ShaderEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD9791929739600CCC07B /* ShaderEffect.cpp */; };
 		273AD97E1929752400CCC07B /* ShaderUniformInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD97C1929752400CCC07B /* ShaderUniformInfo.cpp */; };
 		273AD98119298DA300CCC07B /* GouraudShadingShaderEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD97F19298DA300CCC07B /* GouraudShadingShaderEffect.cpp */; };
+		27D5F6B8192AEA09003A1902 /* SolidColorShaderEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,6 +87,8 @@
 		273AD97F19298DA300CCC07B /* GouraudShadingShaderEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GouraudShadingShaderEffect.cpp; sourceTree = "<group>"; };
 		273AD98019298DA300CCC07B /* GouraudShadingShaderEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GouraudShadingShaderEffect.h; sourceTree = "<group>"; };
 		273AD9821929964F00CCC07B /* FastLightingShaderSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FastLightingShaderSource.h; sourceTree = "<group>"; };
+		27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SolidColorShaderEffect.cpp; path = "VGLPP/vgl/VGL System Effects/SolidColorShaderEffect.cpp"; sourceTree = SOURCE_ROOT; };
+		27D5F6B7192AEA09003A1902 /* SolidColorShaderEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SolidColorShaderEffect.h; path = "VGLPP/vgl/VGL System Effects/SolidColorShaderEffect.h"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +195,8 @@
 				273AD9821929964F00CCC07B /* FastLightingShaderSource.h */,
 				273AD97F19298DA300CCC07B /* GouraudShadingShaderEffect.cpp */,
 				273AD98019298DA300CCC07B /* GouraudShadingShaderEffect.h */,
+				27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */,
+				27D5F6B7192AEA09003A1902 /* SolidColorShaderEffect.h */,
 			);
 			path = "VGL System Effects";
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 				273AD9671929548300CCC07B /* BaseState.cpp in Sources */,
 				273AD973192957D300CCC07B /* EffectPropertyMaterial.cpp in Sources */,
 				273AD9761929594300CCC07B /* EffectPropertyLight.cpp in Sources */,
+				27D5F6B8192AEA09003A1902 /* SolidColorShaderEffect.cpp in Sources */,
 				273AD961192951F800CCC07B /* MatTypes.cpp in Sources */,
 				273AD97B1929739600CCC07B /* ShaderEffect.cpp in Sources */,
 				273AD95B1929514800CCC07B /* System.cpp in Sources */,
@@ -351,8 +357,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/mac",
-					frameworks,
+					"\"$(PROJECT_DIR)/mac frameworks\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -368,8 +373,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/mac",
-					frameworks,
+					"\"$(PROJECT_DIR)/mac frameworks\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -399,6 +403,7 @@
 				273AD9481929489000CCC07B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
