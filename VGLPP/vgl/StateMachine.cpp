@@ -11,6 +11,9 @@
 
 #include <stdexcept>
 #include "StateMachine.h"
+#include "ShaderEffect.h"
+#include "SolidColorShaderEffect.h"
+#include "GouraudShadingShaderEffect.h"
 #include "BaseState.h"
 
 using namespace std;
@@ -43,12 +46,20 @@ namespace vgl
   
   StateMachine::StateMachine()
   {
+    //setup state model object
     state = shared_ptr<BaseState>(new BaseState);
     
+    //create system shader effects
+    solidColorEffect = shared_ptr<ShaderEffect>(new SolidColorShaderEffect);
+    gouraudEffect = shared_ptr<ShaderEffect>(new GouraudShadingShaderEffect);
+    shaderEffectStack.push(defaultEffectForDevice());
+    
+    //init the transform stacks
     transform.modelviewMatrix.push(mat4Identity);
     transform.projectionMatrix.push(mat4Identity);
     transform.textureMatrix.push(mat4Identity);
     
+    //setup the utility vertex buffers & arrays
     glGenBuffers(5, utilityVBOs);
     glGenBuffers(2, texRectVBOs);
     utilityVBO = utilityVBOs[0];
@@ -108,6 +119,26 @@ namespace vgl
     }
   }
 
+  void StateMachine::setShaderEffect(shared_ptr<ShaderEffect> effect)
+  {
+    shaderEffectStack.top() = effect;
+  }
+  
+  void StateMachine::pushShaderEffect(shared_ptr<ShaderEffect> effect)
+  {
+    shaderEffectStack.push(effect);
+  }
+  
+  void StateMachine::popShaderEffect()
+  {
+    shaderEffectStack.pop();
+  }
+  
+  shared_ptr<ShaderEffect> StateMachine::defaultEffectForDevice()
+  {
+    return gouraudEffect;
+  }
+  
   void StateMachine::pushModelView()
   {
     transform.modelviewMatrix.push(transform.modelviewMatrix.top());
@@ -120,8 +151,156 @@ namespace vgl
   void StateMachine::popModelView()
   {
     transform.modelviewMatrix.pop();
-    //[self updateMatrixState];
+    updateMatrixState();
   }
+  
+  void StateMachine::updateMatrixState()
+  {
+    state->getTransform()->setModelviewMatrix(transform.modelviewMatrix.top());
+    state->getTransform()->setProjectionMatrix(transform.projectionMatrix.top());
+
+    shaderEffect->setTransformDirty();
+  }
+
+  void StateMachine::setDiffuseMaterialColor(float4 diff)
+  {
+    state->getMaterial()->setDiffuse(diff);
+    shaderEffect->setMaterialDiffuseDirty();
+  }
+  
+  void StateMachine::setAmbientMaterialColor(float4 amb)
+  {
+    state->getMaterial()->setAmbient(amb);
+    shaderEffect->setMaterialAmbientDirty();
+  }
+  
+  void StateMachine::setEmissiveMaterialColor(float4 em)
+  {
+    state->getMaterial()->setEmissive(em);
+    shaderEffect->setMaterialEmissiveDirty();
+  }
+  
+  void StateMachine::setSpecularMaterialColor(float4 spec)
+  {
+    state->getMaterial()->setSpecular(spec);
+    shaderEffect->setMaterialSpecularDirty();
+  }
+  
+  void StateMachine::setShininessMaterialValue(float shininess)
+  {
+    state->getMaterial()->setShininess(shininess);
+    shaderEffect->setMaterialShininessDirty();
+  }
+
+  void StateMachine::setLightPosition(float4 v, int lightIndex)
+  {
+    //transform it first
+    float4 transV = mat4MultiplyFloat4(transform.modelviewMatrix.top(), v);
+    shared_ptr<EffectPropertyLight> light = state->lightAtIndex(lightIndex);
+    
+    float oldW = light->getPosition().w;
+    
+    light->setWorldPosition(v);
+    light->setPosition(transV);
+    shaderEffect->setLightDirty(lightIndex);
+    
+    if(v.w != oldW)
+    {
+      //for now just rebuild every internal shader that depends on this.
+      GouraudShadingShaderEffect *gouraud = (GouraudShadingShaderEffect *)gouraudEffect.get();
+      gouraud->setLightingVeryDirty();
+    }
+  }
+
+  void StateMachine::setLightAmbientColor(float4 v, int lightIndex)
+  {
+    state->lightAtIndex(lightIndex)->setAmbient(v);
+    shaderEffect->setLightDirty(lightIndex);
+  }
+  
+  void StateMachine::setLightDiffuseColor(float4 v, int lightIndex)
+  {
+    state->lightAtIndex(lightIndex)->setDiffuse(v);
+    shaderEffect->setLightDirty(lightIndex);
+  }
+  
+  void StateMachine::setLightSpecularColor(float4 v, int lightIndex)
+  {
+    state->lightAtIndex(lightIndex)->setSpecular(v);
+    shaderEffect->setLightDirty(lightIndex);
+  }
+  
+  void StateMachine::setLightSpotDirection(float3 v, int lightIndex)
+  {
+    float4 glkV = make_float4(v.x, v.y, v.z, 0);
+    glkV = mat4MultiplyFloat4(transform.modelviewMatrix.top(), glkV);
+    float3 transV = make_float3(glkV.x, glkV.y, glkV.z);
+    shared_ptr<EffectPropertyLight> light = state->lightAtIndex(lightIndex);
+
+    light->setSpotDirection(transV);
+    light->setWorldSpotDirection(v);
+    shaderEffect->setLightDirty(lightIndex);
+  }
+  
+  void StateMachine::setLightSpotExponent(float exp, int lightIndex)
+  {
+    state->lightAtIndex(lightIndex)->setSpotExponent(exp);
+    shaderEffect->setLightDirty(lightIndex);
+  }
+  
+  void StateMachine::setLightSpotCutoff(float cutoff, int lightIndex)
+  {
+    shared_ptr<EffectPropertyLight> light = state->lightAtIndex(lightIndex);
+
+    float oldCutoff = light->getSpotCutoff();
+    bool oldIsSpot = (oldCutoff != 180.0f);
+
+    light->setSpotCutoff(cutoff);
+    shaderEffect->setLightDirty(lightIndex);
+
+    if((cutoff != 180.0f) != oldIsSpot)
+    {
+      //for now just rebuild every internal shader that depends on this.
+      GouraudShadingShaderEffect *gouraud = (GouraudShadingShaderEffect *)gouraudEffect.get();
+      gouraud->setLightingVeryDirty();
+    }
+  }
+  
+  void StateMachine::setLightAttenuationFactors(float3 v, int lightIndex)
+  {
+    shared_ptr<EffectPropertyLight> light = state->lightAtIndex(lightIndex);
+    
+    float3 oldAtten = light->getAttenuation();
+    bool oldState = (oldAtten.x != 1.0 || oldAtten.y != 0.0 || oldAtten.z != 0.0);
+    
+    light->setAttenuation(v.x, v.y, v.z);
+    shaderEffect->setLightDirty(lightIndex);
+    
+    bool lState = (v.x != 1.0 || v.y != 0.0 || v.z != 0.0);
+    if(lState != oldState)
+    {
+      //for now just rebuild every internal shader that depends on this.
+      GouraudShadingShaderEffect *gouraud = (GouraudShadingShaderEffect *)gouraudEffect.get();
+      gouraud->setLightingVeryDirty();
+    }
+  }
+  
+  void StateMachine::enableLight(bool b, int lightIndex)
+  {
+    shared_ptr<EffectPropertyLight> light = state->lightAtIndex(lightIndex);
+
+    bool oldState = light->isEnabled(), lState = b ? true : false;
+    light->setEnabled(b);
+    shaderEffect->setLightDirty(lightIndex);
+
+    if(lState != oldState)
+    {
+      //for now just rebuild every internal shader that depends on this.
+      GouraudShadingShaderEffect *gouraud = (GouraudShadingShaderEffect *)gouraudEffect.get();
+      gouraud->setLightingVeryDirty();
+    }
+  }
+
   
 }
 

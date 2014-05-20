@@ -118,7 +118,7 @@ namespace vgl
     
     bool isUniformNameBuiltin(const string &name);
     
-    std::map<string, std::shared_ptr<ShaderUniformInfo> > getUniformInfo();
+    std::map<string, std::shared_ptr<ShaderUniformInfo>> getUniformInfo();
     
     void clearShaders(GLuint *nShaders, int count);
 

@@ -23,6 +23,7 @@ using std::shared_ptr;
 
 namespace vgl
 {
+  class ShaderEffect;
   class BaseState;
   
   // Named vertex attributes for mapping VGLEffects logic to client vertex attrib enables
@@ -64,15 +65,48 @@ namespace vgl
     GLuint getCurrentShaderProgram();
     void useShaderProgram(GLuint shaderProgram);
 
+    inline shared_ptr<ShaderEffect> getShaderEffect() { return shaderEffect; }
+    void setShaderEffect(shared_ptr<ShaderEffect> effect);
+    void pushShaderEffect(shared_ptr<ShaderEffect> effect);
+    void popShaderEffect();
+    shared_ptr<ShaderEffect> defaultEffectForDevice();
 
     //transforms////////////////////////////////
     void pushModelView();
     void popModelView();
     
+    //materials/////////////////////////////////
+    void setDiffuseMaterialColor(float4 diff);
+    void setAmbientMaterialColor(float4 amb);
+    void setEmissiveMaterialColor(float4 em);
+    void setSpecularMaterialColor(float4 spec);
+    void setShininessMaterialValue(float shininess);
+    
+    //lights///////////////////////////////////
+    void setLightPosition(float4 v, int lightIndex);
+    void setLightAmbientColor(float4 v, int lightIndex);
+    void setLightDiffuseColor(float4 v, int lightIndex);
+    void setLightSpecularColor(float4 v, int lightIndex);
+    void setLightSpotDirection(float3 v, int lightIndex);
+    void setLightSpotExponent(float exp, int lightIndex);
+    void setLightSpotCutoff(float cutoff, int lightIndex);
+    void setLightAttenuationFactors(float3 v, int lightIndex);
+    void enableLight(bool b, int lightIndex);
+    
   private:
+    
+    void updateMatrixState();
+    
     //core state
     shared_ptr<BaseState> state;
     Transform transform;
+    
+    //effects
+    shared_ptr<ShaderEffect> gouraudEffect;
+    shared_ptr<ShaderEffect> solidColorEffect;
+    
+    shared_ptr<ShaderEffect> shaderEffect;
+    std::stack<shared_ptr<ShaderEffect>> shaderEffectStack;
     
     GLuint currentShaderProgram;
 

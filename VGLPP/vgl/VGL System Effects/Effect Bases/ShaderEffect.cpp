@@ -719,11 +719,11 @@ namespace vgl
     return ret;
   }
   
-  map<string, shared_ptr<ShaderUniformInfo> > ShaderEffect::getUniformInfo()
+  map<string, shared_ptr<ShaderUniformInfo>> ShaderEffect::getUniformInfo()
   {
     GLint numUniforms = 0, maxUniformNameLen = 0, size = 0, count = 0;
     GLsizei len = 0;
-    map<string, shared_ptr<ShaderUniformInfo> > info;
+    map<string, shared_ptr<ShaderUniformInfo>> info;
     GLenum type;
     GLenum iformat = GL_INT;
     enum TYPE { ENTRY, CHECK, NONE } uiType = ENTRY;
