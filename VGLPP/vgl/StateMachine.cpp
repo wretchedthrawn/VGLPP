@@ -24,7 +24,7 @@ using namespace std;
 
 namespace vgl
 {
-  static shared_ptr<StateMachine> constructingStateMachine;
+  static StateMachine *constructingStateMachine = nullptr;
   
   static inline float RAD(float n)  { return (n * (M_PI/180.0f)); }
   //static inline float DEG(float n)  { return (n * (180.0f/M_PI)); }
@@ -59,7 +59,7 @@ namespace vgl
   
   StateMachine::StateMachine()
   {
-    constructingStateMachine = shared_ptr<StateMachine>(this);
+    constructingStateMachine = this;
     
     //setup state model object
     state = shared_ptr<BaseState>(new BaseState);
@@ -94,14 +94,17 @@ namespace vgl
     glGenVertexArrays(1, &defaultVAO);
     glBindVertexArray(defaultVAO);
     
+    cout << "VGL Seems to be up and running..." << endl;
+    
     //drop this when the system is finished grabbing it
     System::system().scheduleTask([] {
-      constructingStateMachine.reset();
+      constructingStateMachine = nullptr;
     });
   }
   
   StateMachine::~StateMachine()
   {
+    cout << "State machine going down... " << endl;
     if(texRectVAO)
       glDeleteVertexArrays(1, &texRectVAO);
     if(defaultVAO)

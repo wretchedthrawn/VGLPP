@@ -12,9 +12,10 @@
 //  using this software at YOUR OWN RISK.
 //
 
+#include <iostream>
+#include <stdexcept>
 #include "System.h"
 #include "StateMachine.h"
-#include <stdexcept>
 
 namespace vgl
 {
@@ -55,7 +56,7 @@ namespace vgl
     {
       stateMachine = shared_ptr<StateMachine>(new StateMachine);
     }
-    
+        
     return stateMachine;
   }
   

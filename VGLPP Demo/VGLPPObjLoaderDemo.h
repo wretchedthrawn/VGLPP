@@ -41,7 +41,6 @@ private:
   bool processEvents();
   void doRender();
   
-  SDL_Renderer *renderer;
   SDL_Window *window;
   SDL_GLContext context;
   int screenW = 0, screenH = 0;

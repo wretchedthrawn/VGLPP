@@ -161,7 +161,6 @@ VGLPPObjLoaderDemo::~VGLPPObjLoaderDemo()
   
   //close and destroy the window
   SDL_DestroyWindow(window);
-  SDL_DestroyRenderer(renderer);
   
   //clean up
   SDL_Quit();
