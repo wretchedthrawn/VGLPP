@@ -86,7 +86,7 @@ namespace vgl
 #ifdef DEBUG
     GLint logLength;
     glGetShaderiv(*shader, GL_INFO_LOG_LENGTH, &logLength);
-    if (logLength > 0)
+    if(logLength > 0)
     {
       GLchar *log = (GLchar *)malloc(logLength);
       glGetShaderInfoLog(*shader, logLength, &logLength, log);
@@ -144,7 +144,7 @@ namespace vgl
 #ifdef DEBUG
     GLint logLength;
     glGetShaderiv(*shader, GL_INFO_LOG_LENGTH, &logLength);
-    if (logLength > 0)
+    if(logLength > 0)
     {
       GLchar *log = (GLchar *)malloc(logLength);
       glGetShaderInfoLog(*shader, logLength, &logLength, log);
@@ -195,7 +195,7 @@ namespace vgl
     
     glValidateProgram(prog);
     glGetProgramiv(prog, GL_INFO_LOG_LENGTH, &logLength);
-    if (logLength > 0)
+    if(logLength > 0)
     {
       GLchar *log = (GLchar *)malloc(logLength);
       glGetProgramInfoLog(prog, logLength, &logLength, log);

@@ -33,7 +33,7 @@ namespace vgl
     light0->setEnabled(GL_TRUE);
     
     //setup lighting defaults
-    for(shared_ptr<EffectPropertyLight> light : lights)
+    for(auto light : lights)
     {
       light->setPosition(make_float4(0, 0, 0, 0));
       light->setAmbient(make_float4(0, 0, 0, 1));
