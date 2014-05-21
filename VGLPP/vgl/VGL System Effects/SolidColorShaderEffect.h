@@ -19,6 +19,13 @@
 
 namespace vgl
 {
+  /**
+   This shader is for when you want to draw solid colored points or polygons (no lighting, no texture).
+   It'll serve that single limited purpose quite well.
+   
+   It is accessible via the StateMachine with a simple call to enableSmoothColorRendering(true)
+   */
+
   class SolidColorShaderEffect : public ShaderEffect
   {
   public:
@@ -28,7 +35,7 @@ namespace vgl
     virtual void prepareToDrawFromState(StateMachine *machine);
     
     inline float getPointSize() { return pointSize; }
-    void setPointSize(float ps);
+    virtual void setPointSize(float ps);
     
   private:
     float pointSize;

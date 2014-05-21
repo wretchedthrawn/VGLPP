@@ -49,14 +49,25 @@ namespace vgl
     return dimensionsForBackingStore().y;
   }
   
-  StateMachine *System::currentStateMachine()
+  shared_ptr<StateMachine> System::currentStateMachine()
   {
     if(!stateMachine)
     {
-      stateMachine = new StateMachine;
+      stateMachine = shared_ptr<StateMachine>(new StateMachine);
     }
     
     return stateMachine;
   }
   
+  void System::scheduleTask(Task t)
+  {
+    scheduledTasks.push_back(t);
+  }
+  
+  void System::runScheduledTasks()
+  {
+    for(auto t : scheduledTasks)
+      t();
+    scheduledTasks.clear();
+  }
 }

@@ -127,6 +127,8 @@ namespace vgl
 
     void setPreLinkStep(std::function<void ()> &pls);
     
+    virtual void setPointSize(float ps);
+    
   protected:
     std::shared_ptr<BaseState> state;
     

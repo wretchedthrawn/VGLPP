@@ -288,14 +288,14 @@ namespace vgl
     *program = glCreateProgram();
     
     //!! vtxFile = [[NSBundle mainBundle] pathForResource:vtxFile ofType:nil];
-    if(!compileShader(&vertShader, GL_VERTEX_SHADER, vtxFile))
+    if(!compileShaderFromFile(&vertShader, GL_VERTEX_SHADER, vtxFile))
     {
       cerr << "Failed to compile vertex shader" << endl;
     }
     
     // Create and compile fragment shader.
     //!! frgFile = [[NSBundle mainBundle] pathForResource:frgFile ofType:nil];
-    if(!compileShader(&fragShader, GL_FRAGMENT_SHADER, frgFile))
+    if(!compileShaderFromFile(&fragShader, GL_FRAGMENT_SHADER, frgFile))
     {
       cerr << "Failed to compile fragment shader" << endl;
     }
@@ -915,6 +915,9 @@ namespace vgl
     dirtyStateFlags |= DS_MISC_FLAGS;
   }
 
-  
+  void ShaderEffect::setPointSize(float ps)
+  {
+    //no base impl. for this
+  }
   
 }

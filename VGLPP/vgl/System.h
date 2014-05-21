@@ -15,10 +15,15 @@
 #ifndef __VGLPP__System__
 #define __VGLPP__System__
 
+#include <functional>
+#include <memory>
+#include <list>
 #include "VecTypes.h"
 
 namespace vgl
 {
+  typedef std::function<void()> Task;
+  
   class StateMachine;
   
   class System
@@ -47,7 +52,7 @@ namespace vgl
     virtual void makeGLContextCurrent();
 
     ///returns access to the current state machine
-    virtual StateMachine *currentStateMachine();
+    virtual std::shared_ptr<StateMachine> currentStateMachine();
 
     //Other methods----------------------------------------------------
     
@@ -57,8 +62,20 @@ namespace vgl
     int backingWidth();
     int backingHeight();
     
+    //This task stuff was put together to get me out of a bind, it's far from perfect
+    
+    ///Schedule a task to occur on the main thread
+    ///currently there is no backbone mechanism to drain these
+    void scheduleTask(Task t);
+    
+    ///Runs and drains the scheduled tasks queue for the main thread
+    void runScheduledTasks();
+    
   private:
-    StateMachine *stateMachine;
+    std::shared_ptr<StateMachine> stateMachine;
+    
+    std::list<Task> scheduledTasks;
+    
   };
 }
 #endif /* defined(__VGLPP_Demo__System__) */

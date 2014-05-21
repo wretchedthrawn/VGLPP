@@ -24,6 +24,8 @@ using namespace std;
 
 namespace vgl
 {
+  static shared_ptr<StateMachine> constructingStateMachine;
+  
   static inline float RAD(float n)  { return (n * (M_PI/180.0f)); }
   //static inline float DEG(float n)  { return (n * (180.0f/M_PI)); }
   
@@ -44,14 +46,24 @@ namespace vgl
 
   StateMachine &StateMachine::machine()
   {
-    //let the system handle this
-    return *(System::system().currentStateMachine());
+    if(constructingStateMachine)
+    {
+      return *constructingStateMachine;
+    }
+    else
+    {
+      //let the system handle this
+      return *(System::system().currentStateMachine());
+    }
   }
   
   StateMachine::StateMachine()
   {
+    constructingStateMachine = shared_ptr<StateMachine>(this);
+    
     //setup state model object
     state = shared_ptr<BaseState>(new BaseState);
+    blendingOn = false;
     
     //create system shader effects
     solidColorEffect = shared_ptr<ShaderEffect>(new SolidColorShaderEffect);
@@ -81,6 +93,11 @@ namespace vgl
     
     glGenVertexArrays(1, &defaultVAO);
     glBindVertexArray(defaultVAO);
+    
+    //drop this when the system is finished grabbing it
+    System::system().scheduleTask([] {
+      constructingStateMachine.reset();
+    });
   }
   
   StateMachine::~StateMachine()
@@ -427,7 +444,187 @@ namespace vgl
     updateMatrixState();
   }
   
+  void StateMachine::enableTexture0(bool b)
+  {
+    bool oldB = state->getTexture0()->isEnabled();
 
+    state->getTexture0()->setEnabled(b ? GL_TRUE : GL_FALSE);
+    if(b != oldB)
+      shaderEffect->setTextureDirty(0);
+  }
   
+  void StateMachine::setPrimaryColor(float4 color)
+  {
+    state->setConstantColor(color);
+    shaderEffect->setConstantColorDirty();
+  }
+  
+  void StateMachine::setPrimaryColor(uint4 colorBytes)
+  {
+    state->setConstantColor(make_float4(colorBytes.x/(float)255, colorBytes.y/(float)255, colorBytes.z/(float)255, colorBytes.w/(float)255));
+    shaderEffect->setConstantColorDirty();
+  }
+  
+  bool StateMachine::enableBlending(bool b)
+  {
+    if(b != blendingOn)
+    {
+      if(b)
+        glEnable(GL_BLEND);
+      else
+        glDisable(GL_BLEND);
+      
+      blendingOn = b;
+      
+      //state was changed
+      return true;
+    }
+    
+    return false;
+  }
+  
+  void StateMachine::setBlendFuncSourceFactor(GLenum srcFactor, GLenum dstFactor)
+  {
+    glBlendFunc(srcFactor, dstFactor);
+  }
+  
+  void StateMachine::enableNormalRescale(bool b)
+  {
+    //most of my shaders have optimized this out.. so nothing for now
+  }
+  
+  void StateMachine::setVertexPointer(int size, GLenum type, int stride, GLvoid *ptr, GLsizeiptr bufferLen)
+  {
+    glBindBuffer(GL_ARRAY_BUFFER, utilityVBOs[0]);
+    glBufferData(GL_ARRAY_BUFFER, bufferLen, ptr, GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(VertexAttribPosition, size, type, GL_FALSE, stride, 0);
+  }
+  
+  void StateMachine::setVertexVBO(int size, GLenum type, int stride, GLvoid *offset)
+  {
+    glVertexAttribPointer(VertexAttribPosition, size, type, GL_FALSE, stride, offset);
+  }
+  
+  void StateMachine::enableVertexArray(bool b)
+  {
+    if(b)
+      glEnableVertexAttribArray(VertexAttribPosition);
+    else
+      glDisableVertexAttribArray(VertexAttribPosition);
+  }
+  
+  void StateMachine::setNormalPointer(int size, GLenum type, int stride, GLvoid *ptr, GLsizeiptr bufferLen)
+  {
+    glBindBuffer(GL_ARRAY_BUFFER, utilityVBOs[1]);
+    glBufferData(GL_ARRAY_BUFFER, bufferLen, ptr, GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(VertexAttribNormal, size, type, GL_FALSE, stride, 0);
+  }
+  
+  void StateMachine::setNormalVBO(int size, GLenum type, int stride, GLvoid *offset)
+  {
+    glVertexAttribPointer(VertexAttribNormal, size, type, GL_FALSE, stride, offset);
+  }
+  
+  void StateMachine::enableNormalArray(bool b)
+  {
+    if(b)
+      glEnableVertexAttribArray(VertexAttribNormal);
+    else
+      glDisableVertexAttribArray(VertexAttribNormal);
+  }
+  
+  void StateMachine::setTangentVBO(int size, GLenum type, int stride, GLvoid *offset)
+  {
+    glVertexAttribPointer(VertexAttribTangent, size, type, GL_FALSE, stride, offset);
+  }
+  
+  void StateMachine::enableTangentArray(bool b)
+  {
+    if(b)
+      glEnableVertexAttribArray(VertexAttribTangent);
+    else
+      glDisableVertexAttribArray(VertexAttribTangent);
+  }
+
+  void StateMachine::setTexcoordPointer(int size, GLenum type, int stride, GLvoid *ptr, GLsizeiptr bufferLen)
+  {
+    glBindBuffer(GL_ARRAY_BUFFER, utilityVBOs[2]);
+    glBufferData(GL_ARRAY_BUFFER, bufferLen, ptr, GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(VertexAttribTexCoord0, size, type, GL_FALSE, stride, 0);
+  }
+  
+  void StateMachine::setTexcoordVBO(int size, GLenum type, int stride, GLvoid *offset)
+  {
+    glVertexAttribPointer(VertexAttribTexCoord0, size, type, GL_FALSE, stride, offset);
+  }
+  
+  void StateMachine::enableTexcoordArray(bool b)
+  {
+    if(b)
+      glEnableVertexAttribArray(VertexAttribTexCoord0);
+    else
+      glDisableVertexAttribArray(VertexAttribTexCoord0);
+  }
+
+  void StateMachine::setColorPointer(int size, GLenum type, int stride, GLvoid *ptr, GLsizeiptr bufferLen)
+  {
+    glBindBuffer(GL_ARRAY_BUFFER, utilityVBOs[2]);
+    glBufferData(GL_ARRAY_BUFFER, bufferLen, ptr, GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(VertexAttribColor, size, type, GL_FALSE, stride, 0);
+  }
+  
+  void StateMachine::setColorVBO(int size, GLenum type, int stride, GLvoid *offset)
+  {
+    glVertexAttribPointer(VertexAttribColor, size, type, GL_FALSE, stride, offset);
+  }
+  
+  void StateMachine::enableColorArray(bool b)
+  {
+    if(b)
+      glEnableVertexAttribArray(VertexAttribColor);
+    else
+      glDisableVertexAttribArray(VertexAttribColor);
+  }
+  
+  void StateMachine::setPointSize(float sz)
+  {
+    shaderEffect->setPointSize(sz);
+  }
+
+  void StateMachine::prepareToDraw()
+  {
+    shaderEffect->prepareToDrawFromState(this);
+  }
+  
+  void StateMachine::invalidateFramebufferAttachments(GLenum *discards, int count)
+  {
+    //only has implementation on mobile
+  }
+  
+  GLuint StateMachine::getUtilityBuffer()
+  {
+    return utilityVBOs[4];
+  }
+  
+  void StateMachine::enableFlatSolidColorRendering(bool b)
+  {
+    if(shaderEffectStack.empty())
+      return;
+    
+    
+    //god I love c++11
+    bool alreadySolid = (typeid(shaderEffectStack.top()) == typeid(SolidColorShaderEffect));
+    
+    if(b)
+    {
+      if(!alreadySolid)
+        pushShaderEffect(solidColorEffect);
+    }
+    else
+    {
+      if(alreadySolid)
+        popShaderEffect();
+    }
+  }
 }
 

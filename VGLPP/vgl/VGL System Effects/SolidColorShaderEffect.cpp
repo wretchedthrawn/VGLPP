@@ -19,7 +19,7 @@ namespace vgl
   SolidColorShaderEffect::SolidColorShaderEffect()
   {
     useFullVertexAttribs = GL_FALSE;
-    loadShader("solidColor.vs", "solidColor.fs", &shaderProgram);
+    loadShader("vgl/shaders/solidColor.vs", "vgl/shaders/solidColor.fs", &shaderProgram);
     
     //Uniform initialization
     glUseProgram(shaderProgram);

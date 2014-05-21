@@ -62,7 +62,7 @@ namespace vgl
     void bindTexRectVAO();
     void bindDefaultFramebuffer();
     
-    //Shaders and effects///////////////////////
+    //Shaders and effects////////////////////////////////////////////////
     
     ///Used to efficiently determine the last bound GL shader program
     GLuint getCurrentShaderProgram();
@@ -74,7 +74,7 @@ namespace vgl
     void popShaderEffect();
     shared_ptr<ShaderEffect> defaultEffectForDevice();
 
-    //transforms////////////////////////////////
+    //transforms/////////////////////////////////////////////////////////
     void pushModelView();
     void popModelView();
     
@@ -98,6 +98,18 @@ namespace vgl
     void textureScale(float2 scale);
     void textureRotate(float angle);
     
+    //texturing//////////////////////////////////////////////////////////
+    void enableTexture0(bool b);
+    
+    //primary color/////////////////////////////////////////////////////
+    void setPrimaryColor(float4 color);
+    void setPrimaryColor(uint4 colorBytes);
+    
+    //blending/////////////////////////////////////////////////////////
+    bool enableBlending(bool b);
+    void setBlendFuncSourceFactor(GLenum srcFactor, GLenum dstFactor);
+
+    
     //materials/////////////////////////////////
     void setDiffuseMaterialColor(float4 diff);
     void setAmbientMaterialColor(float4 amb);
@@ -105,7 +117,7 @@ namespace vgl
     void setSpecularMaterialColor(float4 spec);
     void setShininessMaterialValue(float shininess);
     
-    //lights///////////////////////////////////
+    //lights////////////////////////////////////////////////////////////
     void setLightPosition(float4 v, int lightIndex);
     void setLightAmbientColor(float4 v, int lightIndex);
     void setLightDiffuseColor(float4 v, int lightIndex);
@@ -116,6 +128,62 @@ namespace vgl
     void setLightAttenuationFactors(float3 v, int lightIndex);
     void enableLight(bool b, int lightIndex);
     
+    //vertex array specification//////////////////////////////////////////
+
+    ///This method prepopulates a VBO every time it is called and should only be used for legacy code that uses small vbos
+    void setVertexPointer(int size, GLenum type, int stride, GLvoid *ptr, GLsizeiptr bufferLen);
+    
+    ///The preferred method for specifying a vertex array, will use the currently bound GL_ARRAY_BUFFER
+    void setVertexVBO(int size, GLenum type, int stride, GLvoid *offset);
+    void enableVertexArray(bool b);
+
+    ///This method prepopulates a VBO every time it is called and should only be used for legacy code that uses small vbos
+    void setNormalPointer(int size, GLenum type, int stride, GLvoid *ptr, GLsizeiptr bufferLen);
+    
+    ///The preferred method for specifying a vertex array, will use the currently bound GL_ARRAY_BUFFER
+    void setNormalVBO(int size, GLenum type, int stride, GLvoid *offset);
+    void enableNormalArray(bool b);
+    
+    ///The preferred method for specifying a vertex array, will use the currently bound GL_ARRAY_BUFFER
+    void setTangentVBO(int size, GLenum type, int stride, GLvoid *offset);
+    void enableTangentArray(bool b);
+    
+    ///This method prepopulates a VBO every time it is called and should only be used for legacy code that uses small vbos
+    void setTexcoordPointer(int size, GLenum type, int stride, GLvoid *ptr, GLsizeiptr bufferLen);
+    
+    ///The preferred method for specifying a vertex array, will use the currently bound GL_ARRAY_BUFFER
+    void setTexcoordVBO(int size, GLenum type, int stride, GLvoid *offset);
+    void enableTexcoordArray(bool b);
+
+    ///This method prepopulates a VBO every time it is called and should only be used for legacy code that uses small vbos
+    void setColorPointer(int size, GLenum type, int stride, GLvoid *ptr, GLsizeiptr bufferLen);
+    
+    ///The preferred method for specifying a vertex array, will use the currently bound GL_ARRAY_BUFFER
+    void setColorVBO(int size, GLenum type, int stride, GLvoid *offset);
+    void enableColorArray(bool b);
+
+    /** currently not implemented **/
+    void enableNormalRescale(bool b);
+    
+    /** Guaranteed to be available and not used by any other system routines */
+    GLuint getUtilityBuffer();
+    
+    //Points///////////////////////////////////////////////////////////////
+    
+    void setPointSize(float sz);
+    
+    //Rendering modes (built-in shaders)///////////////////////////////////
+    void enableFlatSolidColorRendering(bool b);
+    
+    //drawing//////////////////////////////////////////////////////////////
+    
+    //Note that I do not abstract glDraw* calls here, just go ahead and use those directly
+    
+    ///Should be called before any gl draw calls to sync state to the current shader effect
+    void prepareToDraw();
+    
+    void invalidateFramebufferAttachments(GLenum *discards, int count);
+
   private:
     
     void updateMatrixState();
@@ -124,6 +192,7 @@ namespace vgl
     //core state
     shared_ptr<BaseState> state;
     Transform transform;
+    bool blendingOn;
     
     //effects
     shared_ptr<ShaderEffect> gouraudEffect;

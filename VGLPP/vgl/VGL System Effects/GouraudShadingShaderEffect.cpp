@@ -247,7 +247,7 @@ namespace vgl
     cout << "Recompiling gouraud lighting shader due to changed lighting state" << endl;
 #endif
     
-    string vertexShader = genFragmentShaderForTextureMode(tex);
+    string vertexShader = genVertexShaderForTextureMode(tex);
     GLuint *shader = (tex) ? &shadersTex[0] : &shaders[0];
     GLuint program = (tex) ? shaderProgramTex : shaderProgram;
     auto &lookup = (tex) ? uniformLookupTableTex : uniformLookupTable;

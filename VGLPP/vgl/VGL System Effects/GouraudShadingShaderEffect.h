@@ -23,6 +23,15 @@ using std::string;
 
 namespace vgl
 {
+  /**
+   This shader shows an example of how to near-perfectly emulate the
+   original fixed-functionality system that legacy OpenGL runs on top of
+   it targets OpenGLES performance over readability.  Because it's so bloated
+   and feature-heavy, It's not strongly recommended to heavily rely on this shader 
+   for production games, but it'll get the job done for testing and in cases where
+   you want a shader that just works properly.
+   */
+  
   class GouraudShadingShaderEffect : public ShaderEffect
   {
   public:
