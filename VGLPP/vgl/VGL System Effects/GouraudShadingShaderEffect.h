@@ -53,15 +53,15 @@ namespace vgl
     bool updateVertexShaderForLightingAndTextureMode(bool tex);
     bool updateVertexShaderForLighting();
     
-    GLuint shaderProgramTex;
+    GLuint shaderProgramTex = 0;
     
     float pointSize;
     unsigned int lightingRecompilationDirtyFlags, builtLightFlags;
     
     std::map<string, int> uniformLookupTableTex;
     
-    GLuint *shaders;
-    GLuint *shadersTex;
+    GLuint *shaders = nullptr;
+    GLuint *shadersTex = nullptr;
   };
 }
 

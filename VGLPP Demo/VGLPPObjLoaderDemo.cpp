@@ -14,8 +14,12 @@
 
 #include <iostream>
 #include "VGLPPObjLoaderDemo.h"
+#include "StateMachine.h"
 #include "VecTypes.h"
+
+#ifndef GL3_PROTOTYPES
 #define GL3_PROTOTYPES 1
+#endif
 #include <OpenGL/gl3.h>
 
 using namespace std;
@@ -74,6 +78,13 @@ VGLPPObjLoaderDemo::VGLPPObjLoaderDemo()
     
   //create and retrieve the vgl state machine
   vgl = currentStateMachine();
+  
+  reshape();
+}
+
+void VGLPPObjLoaderDemo::reshape()
+{
+  vgl->perspective(45, (float)screenW/screenH, 0.1f, 1000.0f);
 }
 
 void VGLPPObjLoaderDemo::run()
@@ -85,6 +96,9 @@ void VGLPPObjLoaderDemo::run()
   {
     //Check for events
     done = processEvents();
+    
+    //Do logic updates
+    update();
     
     //Render display
     SDL_GL_MakeCurrent(window, context);
@@ -134,9 +148,60 @@ bool VGLPPObjLoaderDemo::processEvents()
   return done;
 }
 
+void VGLPPObjLoaderDemo::update()
+{
+  t++;
+}
+
+void VGLPPObjLoaderDemo::renderFlatTriangleTest()
+{
+  static float verts[] = { -1, 0, 0, 1, 0, 0, 0, 1, 0 };
+  
+  vgl->setVertexPointer(3, GL_FLOAT, 0, verts, sizeof(float)*9);
+  vgl->enableVertexArray(true);
+  
+  vgl->modelViewLoadIdentity();
+  vgl->translate(make_float3(0, 0, -5));
+  vgl->rotate(t, make_float3(0, 1, 0));
+  
+  vgl->setPrimaryColor(make_float4(0, 0, 1, 1));
+  vgl->enableFlatSolidColorRendering(true);
+  vgl->prepareToDraw();
+  
+  glDrawArrays(GL_TRIANGLES, 0, 3);
+  
+  vgl->enableFlatSolidColorRendering(false);
+}
+
+void VGLPPObjLoaderDemo::renderGouraudTriangleTest()
+{
+  static float verts[] = { -1, 0, 0, 1, 0, 0, 0, 1, 0 };
+  static float norms[] = { 0, 0, 1, 0, 0, 1, 0, 0, 1 };
+  
+  vgl->setVertexPointer(3, GL_FLOAT, 0, verts, sizeof(float)*9);
+  vgl->enableVertexArray(true);
+
+  vgl->setNormalPointer(3, GL_FLOAT, 0, norms, sizeof(float)*9);
+  vgl->enableNormalArray(true);
+
+  vgl->modelViewLoadIdentity();
+  vgl->translate(make_float3(0, 0, -5));
+  vgl->rotate(t, make_float3(0, 1, 0));
+  
+  vgl->setPrimaryColor(make_float4(0, 0, 1, 1));
+  vgl->prepareToDraw();
+  
+  glDrawArrays(GL_TRIANGLES, 0, 3);
+  
+  vgl->enableNormalArray(false);
+}
+
 void VGLPPObjLoaderDemo::doRender()
 {
   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+  
+  renderGouraudTriangleTest();
+  //renderFlatTriangleTest();
 }
 
 uint2 VGLPPObjLoaderDemo::dimensionsForBackingStore()

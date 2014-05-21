@@ -39,11 +39,18 @@ public:
 
 private:
   bool processEvents();
+  void update();
   void doRender();
+  void reshape();
+  
+  void renderFlatTriangleTest();
+  void renderGouraudTriangleTest();
   
   SDL_Window *window;
   SDL_GLContext context;
   int screenW = 0, screenH = 0;
+  
+  float t = 0.0f; //time
   
   //convenient pointer to the vgl state machine
   std::shared_ptr<vgl::StateMachine> vgl;

@@ -132,9 +132,9 @@ namespace vgl
   protected:
     std::shared_ptr<BaseState> state;
     
-    GLuint shaderProgram;
+    GLuint shaderProgram = 0;
     
-    unsigned int dirtyStateFlags;
+    unsigned int dirtyStateFlags = 0;
     std::map<string, int> uniformLookupTable;
     
     GLboolean useFullVertexAttribs;

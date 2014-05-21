@@ -511,8 +511,8 @@ namespace vgl
   GLint ShaderEffect::getUniformLocation(const string &str)
   {
     auto iter = uniformLookupTable.find(str);
-    int num = uniformLookupTable[str];
-    if(iter != uniformLookupTable.end())
+    int num = -1;
+    if(iter == uniformLookupTable.end())
     {
       GLint loc = 0;
       
@@ -525,8 +525,12 @@ namespace vgl
       if(num)
         uniformLookupTable[str] = num;
     }
+    else
+    {
+      num = iter->second;
+    }
     
-    return (iter != uniformLookupTable.end()) ? num : -1;
+    return num;
   }
   
   template <typename T>
