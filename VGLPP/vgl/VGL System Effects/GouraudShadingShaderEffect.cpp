@@ -67,10 +67,9 @@ namespace vgl
     //compile textured shader
     vertexVec = vector<string>(vertexTex, vertexTex+1);
     fragmentVec = vector<string>(fragmentTex, fragmentTex+1);
-    auto strongSelf = shared_ptr<GouraudShadingShaderEffect>(this);
     preLinkStep = function<void()>([=]{
-      glBindAttribLocation(strongSelf->shaderProgramTex, VertexAttribNormal, "normal");
-      glBindAttribLocation(strongSelf->shaderProgramTex, VertexAttribTexCoord0, "texcoord0");
+      glBindAttribLocation(shaderProgramTex, VertexAttribNormal, "normal");
+      glBindAttribLocation(shaderProgramTex, VertexAttribTexCoord0, "texcoord0");
     });
     loadShaders(vertexVec, fragmentVec, &shaderProgramTex, &shadersTex);
     preLinkStep = 0;

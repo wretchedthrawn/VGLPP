@@ -68,7 +68,7 @@ namespace vgl
     //create system shader effects
     solidColorEffect = shared_ptr<ShaderEffect>(new SolidColorShaderEffect);
     gouraudEffect = shared_ptr<ShaderEffect>(new GouraudShadingShaderEffect);
-    shaderEffectStack.push(defaultEffectForDevice());
+    pushShaderEffect(defaultEffectForDevice());
     
     //init the transform stacks
     transform.modelviewMatrix.push(mat4Identity);
@@ -146,16 +146,19 @@ namespace vgl
   void StateMachine::setShaderEffect(shared_ptr<ShaderEffect> effect)
   {
     shaderEffectStack.top() = effect;
+    shaderEffect = effect;
   }
   
   void StateMachine::pushShaderEffect(shared_ptr<ShaderEffect> effect)
   {
     shaderEffectStack.push(effect);
+    shaderEffect = effect;
   }
   
   void StateMachine::popShaderEffect()
   {
     shaderEffectStack.pop();
+    shaderEffect = shaderEffectStack.top();
   }
   
   shared_ptr<ShaderEffect> StateMachine::defaultEffectForDevice()
