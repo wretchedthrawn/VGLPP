@@ -30,6 +30,7 @@
 		276CE467192D7CDF00C33F47 /* TextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276CE465192D7CDF00C33F47 /* TextureLoader.cpp */; };
 		276CE46A192D7E8100C33F47 /* SDLTextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276CE468192D7E8100C33F47 /* SDLTextureLoader.cpp */; };
 		276CE46E192D838000C33F47 /* mountain.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 276CE46C192D835B00C33F47 /* mountain.png */; };
+		276CE471192D866800C33F47 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276CE46F192D866800C33F47 /* TextureManager.cpp */; };
 		2774AA26192C32690015EB35 /* VGLPPObjLoaderDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2774AA24192C32690015EB35 /* VGLPPObjLoaderDemo.cpp */; };
 		27D5F6B8192AEA09003A1902 /* SolidColorShaderEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */; };
 		27F26202192C356400AD8D2A /* gouraud.fs in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27F261FB192C351800AD8D2A /* gouraud.fs */; };
@@ -132,6 +133,8 @@
 		276CE468192D7E8100C33F47 /* SDLTextureLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SDLTextureLoader.cpp; sourceTree = "<group>"; };
 		276CE469192D7E8100C33F47 /* SDLTextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLTextureLoader.h; sourceTree = "<group>"; };
 		276CE46C192D835B00C33F47 /* mountain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mountain.png; sourceTree = "<group>"; };
+		276CE46F192D866800C33F47 /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
+		276CE470192D866800C33F47 /* TextureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureManager.h; sourceTree = "<group>"; };
 		2774AA24192C32690015EB35 /* VGLPPObjLoaderDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VGLPPObjLoaderDemo.cpp; sourceTree = "<group>"; };
 		2774AA25192C32690015EB35 /* VGLPPObjLoaderDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGLPPObjLoaderDemo.h; sourceTree = "<group>"; };
 		27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = SolidColorShaderEffect.cpp; path = "VGLPP/vgl/VGL System Effects/SolidColorShaderEffect.cpp"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -277,6 +280,8 @@
 				276CE466192D7CDF00C33F47 /* TextureLoader.h */,
 				276CE468192D7E8100C33F47 /* SDLTextureLoader.cpp */,
 				276CE469192D7E8100C33F47 /* SDLTextureLoader.h */,
+				276CE46F192D866800C33F47 /* TextureManager.cpp */,
+				276CE470192D866800C33F47 /* TextureManager.h */,
 			);
 			path = vom;
 			sourceTree = "<group>";
@@ -373,6 +378,7 @@
 				273AD97E1929752400CCC07B /* ShaderUniformInfo.cpp in Sources */,
 				273AD9641929521000CCC07B /* Quat.cpp in Sources */,
 				273AD96C1929553800CCC07B /* EffectPropertyTransform.cpp in Sources */,
+				276CE471192D866800C33F47 /* TextureManager.cpp in Sources */,
 				276CE46A192D7E8100C33F47 /* SDLTextureLoader.cpp in Sources */,
 				2774AA26192C32690015EB35 /* VGLPPObjLoaderDemo.cpp in Sources */,
 			);

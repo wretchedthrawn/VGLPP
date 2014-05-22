@@ -26,8 +26,6 @@
 
 using namespace std;
 
-static vom::Texture2D *tex;
-
 VGLPPObjLoaderDemo::VGLPPObjLoaderDemo()
 {
   context = NULL;
