@@ -29,6 +29,7 @@
 		276CE464192D7A9D00C33F47 /* Texture2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276CE462192D7A9D00C33F47 /* Texture2D.cpp */; };
 		276CE467192D7CDF00C33F47 /* TextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276CE465192D7CDF00C33F47 /* TextureLoader.cpp */; };
 		276CE46A192D7E8100C33F47 /* SDLTextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276CE468192D7E8100C33F47 /* SDLTextureLoader.cpp */; };
+		276CE46E192D838000C33F47 /* mountain.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 276CE46C192D835B00C33F47 /* mountain.png */; };
 		2774AA26192C32690015EB35 /* VGLPPObjLoaderDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2774AA24192C32690015EB35 /* VGLPPObjLoaderDemo.cpp */; };
 		27D5F6B8192AEA09003A1902 /* SolidColorShaderEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */; };
 		27F26202192C356400AD8D2A /* gouraud.fs in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27F261FB192C351800AD8D2A /* gouraud.fs */; };
@@ -60,6 +61,16 @@
 				273AD94D19294A0A00CCC07B /* SDL2.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		276CE46D192D837700C33F47 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = assets;
+			dstSubfolderSpec = 6;
+			files = (
+				276CE46E192D838000C33F47 /* mountain.png in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		27F261FF192C355000AD8D2A /* Copy Resources */ = {
@@ -120,6 +131,7 @@
 		276CE466192D7CDF00C33F47 /* TextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureLoader.h; sourceTree = "<group>"; };
 		276CE468192D7E8100C33F47 /* SDLTextureLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SDLTextureLoader.cpp; sourceTree = "<group>"; };
 		276CE469192D7E8100C33F47 /* SDLTextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLTextureLoader.h; sourceTree = "<group>"; };
+		276CE46C192D835B00C33F47 /* mountain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mountain.png; sourceTree = "<group>"; };
 		2774AA24192C32690015EB35 /* VGLPPObjLoaderDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VGLPPObjLoaderDemo.cpp; sourceTree = "<group>"; };
 		2774AA25192C32690015EB35 /* VGLPPObjLoaderDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGLPPObjLoaderDemo.h; sourceTree = "<group>"; };
 		27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = SolidColorShaderEffect.cpp; path = "VGLPP/vgl/VGL System Effects/SolidColorShaderEffect.cpp"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -171,6 +183,7 @@
 				2774AA24192C32690015EB35 /* VGLPPObjLoaderDemo.cpp */,
 				2774AA25192C32690015EB35 /* VGLPPObjLoaderDemo.h */,
 				273AD9421929489000CCC07B /* VGLPP_Demo.1 */,
+				276CE46B192D82F100C33F47 /* assets */,
 			);
 			path = "VGLPP Demo";
 			sourceTree = "<group>";
@@ -268,6 +281,14 @@
 			path = vom;
 			sourceTree = "<group>";
 		};
+		276CE46B192D82F100C33F47 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				276CE46C192D835B00C33F47 /* mountain.png */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
 		27F261F8192C351800AD8D2A /* shaders */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +315,7 @@
 				273AD93B1929489000CCC07B /* CopyFiles */,
 				273AD94C192949FF00CCC07B /* Copy Frameworks */,
 				27F261FF192C355000AD8D2A /* Copy Resources */,
+				276CE46D192D837700C33F47 /* CopyFiles */,
 			);
 			buildRules = (
 			);
