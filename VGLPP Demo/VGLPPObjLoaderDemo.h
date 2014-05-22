@@ -17,12 +17,8 @@
 
 #include <memory>
 #include "System.h"
+#include "StateMachine.h"
 #include "SDL.h"
-
-namespace vgl
-{
-  class StateMachine;
-}
 
 class VGLPPObjLoaderDemo : private vgl::System
 {

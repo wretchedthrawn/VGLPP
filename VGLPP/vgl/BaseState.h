@@ -24,14 +24,14 @@
 #include "EffectPropertyMaterial.h"
 #include "EffectPropertyLight.h"
 
-/**
- This class serves as the end-all catch-all for the current
- state.  It is set by the state machine and referenced by all
- GL effect objects to query the state.
- */
-
 namespace vgl
 {
+  /**
+   This class serves as the end-all catch-all for the current
+   state.  It is set by the state machine and referenced by all
+   GL effect objects to query the state.
+   */
+
   class BaseState
   {
   public:

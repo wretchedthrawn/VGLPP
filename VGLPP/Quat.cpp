@@ -1,5 +1,7 @@
 //
-//  Quat.m
+//  Quat.cpp
+
+//This is old code that I slosh around that'll probably never die....
 
 #include <math.h>
 #import "Quat.h"

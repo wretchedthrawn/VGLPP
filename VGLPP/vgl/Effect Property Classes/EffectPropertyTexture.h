@@ -19,6 +19,12 @@
 
 namespace vgl
 {
+  /**
+   Effect property classes such as this exist to store state model so
+   it can be stored in one place and easily passed between shader effects.
+   Their only purpose is this and they live in the BaseState class
+   */
+
   class EffectPropertyTexture
   {
   public:

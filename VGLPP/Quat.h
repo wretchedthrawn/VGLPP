@@ -1,6 +1,8 @@
 //
 //  Quat.h
 
+//This is old code that I slosh around that'll probably never die....
+
 #import "VecTypes.h"
 
 #ifdef __cplusplus

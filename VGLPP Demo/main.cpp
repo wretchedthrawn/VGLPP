@@ -13,7 +13,9 @@
 #include <memory>
 #include "SDL.h"
 #include "VGLPPObjLoaderDemo.h"
+#ifndef GL3_PROTOTYPES
 #define GL3_PROTOTYPES 1
+#endif
 #include <OpenGL/gl3.h>
 
 using namespace std;

@@ -204,13 +204,9 @@
 		273AD95319294CF300CCC07B /* VGLPP */ = {
 			isa = PBXGroup;
 			children = (
+				276CE472192D88AA00C33F47 /* c util */,
 				273AD9571929500F00CCC07B /* vgl */,
 				276CE461192D7A7900C33F47 /* vom */,
-				273AD95A1929501300CCC07B /* VecTypes.h */,
-				273AD960192951F800CCC07B /* MatTypes.h */,
-				273AD95F192951F800CCC07B /* MatTypes.cpp */,
-				273AD9631929521000CCC07B /* Quat.h */,
-				273AD9621929521000CCC07B /* Quat.cpp */,
 				273AD970192956C500CCC07B /* vgl.h */,
 			);
 			path = VGLPP;
@@ -292,6 +288,18 @@
 				276CE46C192D835B00C33F47 /* mountain.png */,
 			);
 			path = assets;
+			sourceTree = "<group>";
+		};
+		276CE472192D88AA00C33F47 /* c util */ = {
+			isa = PBXGroup;
+			children = (
+				273AD95A1929501300CCC07B /* VecTypes.h */,
+				273AD960192951F800CCC07B /* MatTypes.h */,
+				273AD95F192951F800CCC07B /* MatTypes.cpp */,
+				273AD9631929521000CCC07B /* Quat.h */,
+				273AD9621929521000CCC07B /* Quat.cpp */,
+			);
+			name = "c util";
 			sourceTree = "<group>";
 		};
 		27F261F8192C351800AD8D2A /* shaders */ = {
