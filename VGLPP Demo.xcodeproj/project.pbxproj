@@ -26,6 +26,9 @@
 		273AD97B1929739600CCC07B /* ShaderEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD9791929739600CCC07B /* ShaderEffect.cpp */; };
 		273AD97E1929752400CCC07B /* ShaderUniformInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD97C1929752400CCC07B /* ShaderUniformInfo.cpp */; };
 		273AD98119298DA300CCC07B /* GouraudShadingShaderEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 273AD97F19298DA300CCC07B /* GouraudShadingShaderEffect.cpp */; };
+		276CE464192D7A9D00C33F47 /* Texture2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276CE462192D7A9D00C33F47 /* Texture2D.cpp */; };
+		276CE467192D7CDF00C33F47 /* TextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276CE465192D7CDF00C33F47 /* TextureLoader.cpp */; };
+		276CE46A192D7E8100C33F47 /* SDLTextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276CE468192D7E8100C33F47 /* SDLTextureLoader.cpp */; };
 		2774AA26192C32690015EB35 /* VGLPPObjLoaderDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2774AA24192C32690015EB35 /* VGLPPObjLoaderDemo.cpp */; };
 		27D5F6B8192AEA09003A1902 /* SolidColorShaderEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */; };
 		27F26202192C356400AD8D2A /* gouraud.fs in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27F261FB192C351800AD8D2A /* gouraud.fs */; };
@@ -111,6 +114,12 @@
 		273AD97F19298DA300CCC07B /* GouraudShadingShaderEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = GouraudShadingShaderEffect.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		273AD98019298DA300CCC07B /* GouraudShadingShaderEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GouraudShadingShaderEffect.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		273AD9821929964F00CCC07B /* FastLightingShaderSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FastLightingShaderSource.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		276CE462192D7A9D00C33F47 /* Texture2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture2D.cpp; sourceTree = "<group>"; };
+		276CE463192D7A9D00C33F47 /* Texture2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture2D.h; sourceTree = "<group>"; };
+		276CE465192D7CDF00C33F47 /* TextureLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureLoader.cpp; sourceTree = "<group>"; };
+		276CE466192D7CDF00C33F47 /* TextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureLoader.h; sourceTree = "<group>"; };
+		276CE468192D7E8100C33F47 /* SDLTextureLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SDLTextureLoader.cpp; sourceTree = "<group>"; };
+		276CE469192D7E8100C33F47 /* SDLTextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLTextureLoader.h; sourceTree = "<group>"; };
 		2774AA24192C32690015EB35 /* VGLPPObjLoaderDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VGLPPObjLoaderDemo.cpp; sourceTree = "<group>"; };
 		2774AA25192C32690015EB35 /* VGLPPObjLoaderDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGLPPObjLoaderDemo.h; sourceTree = "<group>"; };
 		27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = SolidColorShaderEffect.cpp; path = "VGLPP/vgl/VGL System Effects/SolidColorShaderEffect.cpp"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -180,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				273AD9571929500F00CCC07B /* vgl */,
+				276CE461192D7A7900C33F47 /* vom */,
 				273AD95A1929501300CCC07B /* VecTypes.h */,
 				273AD960192951F800CCC07B /* MatTypes.h */,
 				273AD95F192951F800CCC07B /* MatTypes.cpp */,
@@ -243,6 +253,19 @@
 				273AD97A1929739600CCC07B /* ShaderEffect.h */,
 			);
 			path = "Effect Bases";
+			sourceTree = "<group>";
+		};
+		276CE461192D7A7900C33F47 /* vom */ = {
+			isa = PBXGroup;
+			children = (
+				276CE462192D7A9D00C33F47 /* Texture2D.cpp */,
+				276CE463192D7A9D00C33F47 /* Texture2D.h */,
+				276CE465192D7CDF00C33F47 /* TextureLoader.cpp */,
+				276CE466192D7CDF00C33F47 /* TextureLoader.h */,
+				276CE468192D7E8100C33F47 /* SDLTextureLoader.cpp */,
+				276CE469192D7E8100C33F47 /* SDLTextureLoader.h */,
+			);
+			path = vom;
 			sourceTree = "<group>";
 		};
 		27F261F8192C351800AD8D2A /* shaders */ = {
@@ -315,8 +338,10 @@
 				273AD9671929548300CCC07B /* BaseState.cpp in Sources */,
 				273AD973192957D300CCC07B /* EffectPropertyMaterial.cpp in Sources */,
 				273AD9761929594300CCC07B /* EffectPropertyLight.cpp in Sources */,
+				276CE467192D7CDF00C33F47 /* TextureLoader.cpp in Sources */,
 				27D5F6B8192AEA09003A1902 /* SolidColorShaderEffect.cpp in Sources */,
 				273AD961192951F800CCC07B /* MatTypes.cpp in Sources */,
+				276CE464192D7A9D00C33F47 /* Texture2D.cpp in Sources */,
 				273AD97B1929739600CCC07B /* ShaderEffect.cpp in Sources */,
 				273AD95B1929514800CCC07B /* System.cpp in Sources */,
 				273AD9411929489000CCC07B /* main.cpp in Sources */,
@@ -326,6 +351,7 @@
 				273AD97E1929752400CCC07B /* ShaderUniformInfo.cpp in Sources */,
 				273AD9641929521000CCC07B /* Quat.cpp in Sources */,
 				273AD96C1929553800CCC07B /* EffectPropertyTransform.cpp in Sources */,
+				276CE46A192D7E8100C33F47 /* SDLTextureLoader.cpp in Sources */,
 				2774AA26192C32690015EB35 /* VGLPPObjLoaderDemo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,6 +440,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"\"$(SRCROOT)/mac frameworks/SDL2.framework/Headers\"",
+					"\"$(SRCROOT)/mac frameworks/SDL2_image.framework/Headers\"",
 				);
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = .;
@@ -432,6 +459,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"\"$(SRCROOT)/mac frameworks/SDL2.framework/Headers\"",
+					"\"$(SRCROOT)/mac frameworks/SDL2_image.framework/Headers\"",
 				);
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = .;
