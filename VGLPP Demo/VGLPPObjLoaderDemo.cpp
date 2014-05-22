@@ -15,6 +15,8 @@
 #include <iostream>
 #include "VGLPPObjLoaderDemo.h"
 #include "StateMachine.h"
+#include "Texture2D.h"
+#include "SDLTextureLoader.h"
 #include "VecTypes.h"
 
 #ifndef GL3_PROTOTYPES
@@ -23,6 +25,8 @@
 #include <OpenGL/gl3.h>
 
 using namespace std;
+
+static vom::Texture2D *tex;
 
 VGLPPObjLoaderDemo::VGLPPObjLoaderDemo()
 {
@@ -78,6 +82,12 @@ VGLPPObjLoaderDemo::VGLPPObjLoaderDemo()
     
   //create and retrieve the vgl state machine
   vgl = currentStateMachine();
+  
+  //setup texture loader
+  vom::Texture2D::setTextureLoader(shared_ptr<vom::SDLTextureLoader>(new vom::SDLTextureLoader));
+  
+  //..and load demo assets
+  
   
   reshape();
 }

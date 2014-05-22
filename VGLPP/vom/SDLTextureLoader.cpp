@@ -59,12 +59,14 @@ namespace vom
     bool alpha = false, mipmapping = false, nonp2 = true;
     GLenum format = GL_RGBA;
     int nOfColors = surf->format->BytesPerPixel;
+    GLenum internalFormat = GL_RGB8;
     if(nOfColors == 4)     // contains an alpha channel
     {
       if(surf->format->Rmask == 0x000000ff)
         format = GL_RGBA;
       else
         format = GL_BGRA;
+      internalFormat = GL_RGBA8;
       alpha = true;
     }
     else if(nOfColors == 3)     // no alpha channel
@@ -73,6 +75,7 @@ namespace vom
         format = GL_RGB;
       else
         format = GL_BGR;
+      internalFormat = GL_RGB8;
       alpha = false;
     }
     else
@@ -114,13 +117,13 @@ namespace vom
       SDL_FillRect(texSurf, NULL, 0);
       SDL_Rect rect = { 0, 0, width, height };
       SDL_BlitSurface(surf, NULL, texSurf, &rect);
-      glTexImage2D(GL_TEXTURE_2D, 0, nOfColors, texWidth, texHeight, 0,
+      glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, texWidth, texHeight, 0,
                    format, GL_UNSIGNED_BYTE, texSurf->pixels);
       SDL_FreeSurface(texSurf);
     }
     else
     {
-      glTexImage2D(GL_TEXTURE_2D, 0, nOfColors, texWidth, texHeight, 0,
+      glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, texWidth, texHeight, 0,
                    format, GL_UNSIGNED_BYTE, surf->pixels);
     }
     
@@ -139,6 +142,6 @@ namespace vom
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     }
     
-    SDL_FreeSurface(surf);    
+    SDL_FreeSurface(surf);
   }
 }
