@@ -18,6 +18,9 @@
 #include <memory>
 #include "System.h"
 #include "StateMachine.h"
+#include "EntityModel.h"
+#include "MaterialManager.h"
+#include "TextureManager.h"
 #include "SDL.h"
 
 class VGLPPObjLoaderDemo : private vgl::System
@@ -45,6 +48,12 @@ private:
   SDL_Window *window;
   SDL_GLContext context;
   int screenW = 0, screenH = 0;
+
+  std::shared_ptr<vom::MaterialManager> materialManager;
+  std::shared_ptr<vom::TextureManager> textureManager;  
+
+  //model
+  std::shared_ptr<vom::EntityModel> model;
   
   float t = 0.0f; //time
   

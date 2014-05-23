@@ -16,6 +16,7 @@
 #include "VGLPPObjLoaderDemo.h"
 #include "StateMachine.h"
 #include "Texture2D.h"
+#include "EntityModel.h"
 #include "SDLTextureLoader.h"
 #include "VecTypes.h"
 
@@ -74,6 +75,7 @@ VGLPPObjLoaderDemo::VGLPPObjLoaderDemo()
   }
   
   cout << "Created OpenGL " << glGetString(GL_VERSION) << " context" << endl;
+  glEnable(GL_DEPTH_TEST);
   
   SDL_GetWindowSize(window, &screenW, &screenH);
   SDL_GL_SetSwapInterval(1);
@@ -84,8 +86,12 @@ VGLPPObjLoaderDemo::VGLPPObjLoaderDemo()
   //setup texture loader
   vom::Texture2D::setTextureLoader(shared_ptr<vom::SDLTextureLoader>(new vom::SDLTextureLoader));
   
-  //..and load demo assets
+  //setup material and texture managers
+  materialManager = shared_ptr<vom::MaterialManager>(new vom::MaterialManager);
+  textureManager = shared_ptr<vom::TextureManager>(new vom::TextureManager);
   
+  //..and load demo assets
+  model = shared_ptr<vom::EntityModel>(new vom::EntityModel("assets/terrain.obj", 0.3f, materialManager, textureManager));
   
   reshape();
 }
@@ -204,12 +210,23 @@ void VGLPPObjLoaderDemo::renderGouraudTriangleTest()
   vgl->enableNormalArray(false);
 }
 
+
 void VGLPPObjLoaderDemo::doRender()
 {
   glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
   
-  renderGouraudTriangleTest();
+  //renderGouraudTriangleTest();
   //renderFlatTriangleTest();
+  
+  vgl->pushModelView();
+  vgl->modelViewLoadIdentity();
+  
+  vgl->translate(make_float3(0, -10, -25));
+  vgl->lookAt(make_float3(0, 0, 0), make_float3(0, 10, 30), make_float3(0, 1, 0));
+  vgl->rotate(t, make_float3(0, 1, 0));
+  model->render();
+  
+  vgl->popModelView();
 }
 
 uint2 VGLPPObjLoaderDemo::dimensionsForBackingStore()

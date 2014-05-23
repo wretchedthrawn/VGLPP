@@ -26,7 +26,7 @@ static inline std::string lastPathComponent(const std::string &path)
 {
   std::string ret = path;
   
-  for(int i = (int)path.length()-1; i >= 0; i++)
+  for(int i = (int)path.length()-1; i >= 0; i--)
   {
     if(slash(path[i]))
     {
@@ -41,7 +41,7 @@ static inline std::string removeLastPathComponent(const std::string &path)
 {
   std::string ret = path;
   
-  for(int i = (int)path.length()-1; i >= 0; i++)
+  for(int i = (int)path.length()-1; i >= 0; i--)
   {
     if(slash(path[i]))
     {
