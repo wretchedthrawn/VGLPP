@@ -23,7 +23,10 @@ namespace vom
   
   Mesh::~Mesh()
   {
-    
+    if(ind_vbo)
+      glDeleteBuffers(1, &ind_vbo);
+    if(ind_vbo_quad)
+      glDeleteBuffers(1, &ind_vbo_quad);
   }
   
   void Mesh::setMaterial(std::shared_ptr<Material> mat)
