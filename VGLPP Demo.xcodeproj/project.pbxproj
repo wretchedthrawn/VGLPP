@@ -32,6 +32,8 @@
 		276CE46E192D838000C33F47 /* mountain.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 276CE46C192D835B00C33F47 /* mountain.png */; };
 		276CE471192D866800C33F47 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 276CE46F192D866800C33F47 /* TextureManager.cpp */; };
 		2774AA26192C32690015EB35 /* VGLPPObjLoaderDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2774AA24192C32690015EB35 /* VGLPPObjLoaderDemo.cpp */; };
+		27A7211D192EDCE5009D62AB /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27A7211B192EDCE5009D62AB /* Material.cpp */; };
+		27A72120192EE184009D62AB /* MaterialManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27A7211E192EE184009D62AB /* MaterialManager.cpp */; };
 		27D5F6B8192AEA09003A1902 /* SolidColorShaderEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */; };
 		27F26202192C356400AD8D2A /* gouraud.fs in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27F261FB192C351800AD8D2A /* gouraud.fs */; };
 		27F26203192C356400AD8D2A /* gouraud.vs in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27F261FC192C351800AD8D2A /* gouraud.vs */; };
@@ -137,6 +139,10 @@
 		276CE470192D866800C33F47 /* TextureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureManager.h; sourceTree = "<group>"; };
 		2774AA24192C32690015EB35 /* VGLPPObjLoaderDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VGLPPObjLoaderDemo.cpp; sourceTree = "<group>"; };
 		2774AA25192C32690015EB35 /* VGLPPObjLoaderDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGLPPObjLoaderDemo.h; sourceTree = "<group>"; };
+		27A7211B192EDCE5009D62AB /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
+		27A7211C192EDCE5009D62AB /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
+		27A7211E192EE184009D62AB /* MaterialManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MaterialManager.cpp; sourceTree = "<group>"; };
+		27A7211F192EE184009D62AB /* MaterialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialManager.h; sourceTree = "<group>"; };
 		27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = SolidColorShaderEffect.cpp; path = "VGLPP/vgl/VGL System Effects/SolidColorShaderEffect.cpp"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		27D5F6B7192AEA09003A1902 /* SolidColorShaderEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SolidColorShaderEffect.h; path = "VGLPP/vgl/VGL System Effects/SolidColorShaderEffect.h"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		27F261FB192C351800AD8D2A /* gouraud.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = gouraud.fs; sourceTree = "<group>"; };
@@ -278,6 +284,10 @@
 				276CE469192D7E8100C33F47 /* SDLTextureLoader.h */,
 				276CE46F192D866800C33F47 /* TextureManager.cpp */,
 				276CE470192D866800C33F47 /* TextureManager.h */,
+				27A7211B192EDCE5009D62AB /* Material.cpp */,
+				27A7211C192EDCE5009D62AB /* Material.h */,
+				27A7211E192EE184009D62AB /* MaterialManager.cpp */,
+				27A7211F192EE184009D62AB /* MaterialManager.h */,
 			);
 			path = vom;
 			sourceTree = "<group>";
@@ -378,6 +388,8 @@
 				273AD961192951F800CCC07B /* MatTypes.cpp in Sources */,
 				276CE464192D7A9D00C33F47 /* Texture2D.cpp in Sources */,
 				273AD97B1929739600CCC07B /* ShaderEffect.cpp in Sources */,
+				27A72120192EE184009D62AB /* MaterialManager.cpp in Sources */,
+				27A7211D192EDCE5009D62AB /* Material.cpp in Sources */,
 				273AD95B1929514800CCC07B /* System.cpp in Sources */,
 				273AD9411929489000CCC07B /* main.cpp in Sources */,
 				273AD95E192951B400CCC07B /* StateMachine.cpp in Sources */,
