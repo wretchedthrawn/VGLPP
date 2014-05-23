@@ -37,6 +37,8 @@
 		27A72123192EE70C009D62AB /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27A72121192EE70C009D62AB /* Entity.cpp */; };
 		27A72126192EE7C2009D62AB /* EntityModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27A72124192EE7C2009D62AB /* EntityModel.cpp */; };
 		27A72129192EE8A4009D62AB /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27A72127192EE8A4009D62AB /* Mesh.cpp */; };
+		27A7212D192EF7B4009D62AB /* terrain.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27A7212B192EF7B1009D62AB /* terrain.mtl */; };
+		27A7212E192EF7B4009D62AB /* terrain.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 27A7212C192EF7B1009D62AB /* terrain.obj */; };
 		27D5F6B8192AEA09003A1902 /* SolidColorShaderEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */; };
 		27F26202192C356400AD8D2A /* gouraud.fs in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27F261FB192C351800AD8D2A /* gouraud.fs */; };
 		27F26203192C356400AD8D2A /* gouraud.vs in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27F261FC192C351800AD8D2A /* gouraud.vs */; };
@@ -76,6 +78,8 @@
 			dstSubfolderSpec = 6;
 			files = (
 				276CE46E192D838000C33F47 /* mountain.png in CopyFiles */,
+				27A7212D192EF7B4009D62AB /* terrain.mtl in CopyFiles */,
+				27A7212E192EF7B4009D62AB /* terrain.obj in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +157,8 @@
 		27A72127192EE8A4009D62AB /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		27A72128192EE8A4009D62AB /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
 		27A7212A192EECDC009D62AB /* StringPathUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringPathUtils.h; sourceTree = "<group>"; };
+		27A7212B192EF7B1009D62AB /* terrain.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = terrain.mtl; sourceTree = "<group>"; };
+		27A7212C192EF7B1009D62AB /* terrain.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = terrain.obj; sourceTree = "<group>"; };
 		27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = SolidColorShaderEffect.cpp; path = "VGLPP/vgl/VGL System Effects/SolidColorShaderEffect.cpp"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		27D5F6B7192AEA09003A1902 /* SolidColorShaderEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SolidColorShaderEffect.h; path = "VGLPP/vgl/VGL System Effects/SolidColorShaderEffect.h"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		27F261FB192C351800AD8D2A /* gouraud.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = gouraud.fs; sourceTree = "<group>"; };
@@ -312,6 +318,8 @@
 			isa = PBXGroup;
 			children = (
 				276CE46C192D835B00C33F47 /* mountain.png */,
+				27A7212B192EF7B1009D62AB /* terrain.mtl */,
+				27A7212C192EF7B1009D62AB /* terrain.obj */,
 			);
 			path = assets;
 			sourceTree = "<group>";
