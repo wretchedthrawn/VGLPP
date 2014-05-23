@@ -33,7 +33,7 @@ namespace vom
   EntityModel::EntityModel()
   {
     num_verts = 0;
-    vertex_vbo = normal_vbo = tex_vbo = vao = 0;
+    vertex_vbo = normal_vbo = tex_vbo = tangent_vbo = vao = 0;
     
     glGenVertexArrays(1, &vao);
   }
@@ -41,7 +41,7 @@ namespace vom
   EntityModel::EntityModel(const string &filename, float scale, shared_ptr<MaterialManager> materialManager, shared_ptr<TextureManager> textureManager)
   {
     num_verts = 0;
-    vertex_vbo = normal_vbo = tex_vbo = vao = 0;
+    vertex_vbo = normal_vbo = tex_vbo = tangent_vbo = vao = 0;
     glGenVertexArrays(1, &vao);
 
     loadOBJ(filename, scale, materialManager, textureManager);
@@ -544,7 +544,7 @@ namespace vom
     vgl->enableNormalArray(true);
     
     glBindBuffer(GL_ARRAY_BUFFER, tex_vbo);
-    vgl->setTexcoordVBO(3, GL_FLOAT, 0, 0);
+    vgl->setTexcoordVBO(2, GL_FLOAT, 0, 0);
     vgl->enableTexcoordArray(true);
     
     if(tangent_vbo)

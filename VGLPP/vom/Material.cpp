@@ -29,12 +29,13 @@ namespace vom
     emit = make_float4(0, 0, 0, 1);
     shininess = 64;
     tileX = tileY = 1.0f;
+    wrap = GL_REPEAT;
   }
   
   Material::Material(std::shared_ptr<Texture2D> texture, float4 diff, float4 amb, float4 spec, float4 emit)
   : diff(diff), amb(amb), spec(spec), emit(emit), shininess(64), tileX(1.0f), tileY(1.0f), texture(texture)
   {
-    
+    wrap = GL_REPEAT;
   }
   
   Material::~Material()

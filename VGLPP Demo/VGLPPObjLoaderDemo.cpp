@@ -224,6 +224,7 @@ void VGLPPObjLoaderDemo::doRender()
   vgl->translate(make_float3(0, -10, -25));
   vgl->lookAt(make_float3(0, 0, 0), make_float3(0, 10, 30), make_float3(0, 1, 0));
   vgl->rotate(t, make_float3(0, 1, 0));
+
   model->render();
   
   vgl->popModelView();
