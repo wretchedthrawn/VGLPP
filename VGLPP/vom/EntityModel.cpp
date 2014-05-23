@@ -22,6 +22,7 @@
 #include "VecTypes.h"
 #include "Mesh.h"
 #include "EntityModel.h"
+#include "Material.h"
 #include "MaterialManager.h"
 #include "TextureManager.h"
 
@@ -64,7 +65,81 @@ namespace vom
   
   void EntityModel::render()
   {
+    bool textureState = true;
+    shared_ptr<vgl::StateMachine> vgl = vgl::System::system().currentStateMachine();
+
+    glBindVertexArray(vao);
+    vgl->enableTexcoordArray(true);
+    vgl->enableTexture0(true);
     
+    for(int submeshIndex = 0; submeshIndex < meshes.size(); submeshIndex++)
+    {
+      auto s = meshes[submeshIndex];
+      bool usesTextureCoordinates = (bool)s->getMaterial()->getTexture();
+      
+      if(!s->getMaterial()->getTexture() && textureState)
+      {
+        vgl->enableTexture0(false);
+        vgl->enableTexcoordArray(false);
+        textureState = false;
+      }
+      else if(s->getMaterial()->getTexture() && !textureState)
+      {
+        vgl->enableTexture0(true);
+        vgl->enableTexcoordArray(true);
+        textureState = true;
+      }
+      
+      if(usesTextureCoordinates && !textureState)
+      {
+        vgl->enableTexcoordArray(true);
+      }
+      
+      if(s->getMaterial()->requiresBlending())
+      {
+        glEnable(GL_BLEND);
+        glEnable(GL_CULL_FACE);
+      }
+      
+      //apply material
+      s->getMaterial()->apply();
+      
+      //and draw the thing
+      vgl->prepareToDraw();
+      
+      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s->ind_vbo);
+      glDrawElements(GL_TRIANGLES, s->num_inds, GL_UNSIGNED_INT, 0);
+      
+      if(s->num_quad_inds)
+      {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, s->ind_vbo_quad);
+        for(int q = 0; q < s->num_quad_inds; q+=4)
+        {
+          //emulate the quad as two triangles in a fan
+          glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (void *)(q*sizeof(uint)));
+        }
+      }
+      
+      //restore default material
+      const float4 colvec = make_float4(0.8, 0.8, 0.8, 1.0f), amb = make_float4(0.2, 0.2, 0.2, 1.0),
+      zero = make_float4(0, 0, 0, 0);
+      
+      vgl->setDiffuseMaterialColor(colvec);
+      vgl->setAmbientMaterialColor(amb);
+      vgl->setSpecularMaterialColor(zero);
+      vgl->setEmissiveMaterialColor(zero);
+      vgl->setShininessMaterialValue(0);
+    
+      if(s->getMaterial()->requiresBlending())
+      {
+        glDisable(GL_BLEND);
+        glDisable(GL_CULL_FACE);
+      }
+    }
+  
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    vgl->bindDefaultVAO();
   }
   
   void EntityModel::finishSubmesh(shared_ptr<Mesh> submesh, uint3 *h_ind, uint4 *h_ind_quad, int istart, int istart_quad, int num_inds)

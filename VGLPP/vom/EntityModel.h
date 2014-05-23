@@ -15,7 +15,7 @@
 #ifndef __VGLPP_Demo__EntityModel__
 #define __VGLPP_Demo__EntityModel__
 
-#include <list>
+#include <vector>
 #include <memory>
 #include "vgl.h"
 #include "Entity.h"
@@ -48,7 +48,7 @@ namespace vom
     GLuint vao;
     GLuint tex_vbo, vertex_vbo, normal_vbo, tangent_vbo, bone_vbo;
     int num_verts;
-    std::list<std::shared_ptr<Mesh>> meshes;
+    std::vector<std::shared_ptr<Mesh>> meshes;
     
     float3 bbsize;
   };
