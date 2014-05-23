@@ -16,6 +16,7 @@
 #include <fstream>
 #include <memory>
 #include <stdexcept>
+#include "StringPathUtils.h"
 #include "MaterialManager.h"
 #include "Material.h"
 #include "TextureManager.h"
@@ -54,41 +55,6 @@ namespace vom
   void MaterialManager::removeMaterial(const string &matName)
   {
     materials.erase(matName);
-  }
-  
-  static inline bool slash(char c)
-  {
-    return (c == '/' || c == '\\');
-  }
-  
-  static string lastPathComponent(const string &path)
-  {
-    string ret = path;
-    
-    for(int i = (int)path.length()-1; i >= 0; i++)
-    {
-      if(slash(path[i]))
-      {
-        return path.substr(i+1);
-      }
-    }
-    
-    return ret;
-  }
-  
-  static string removeLastPathComponent(const string &path)
-  {
-    string ret = path;
-    
-    for(int i = (int)path.length()-1; i >= 0; i++)
-    {
-      if(slash(path[i]))
-      {
-        return path.substr(0, i);
-      }
-    }
-    
-    return ret;
   }
 
   void MaterialManager::readMtl(const string &mtlFilename, shared_ptr<TextureManager> textureManager)

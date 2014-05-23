@@ -1,4 +1,3 @@
-
 //
 //  VGLPP
 //  A very limited port of the Verto Core GL Layer from Verto Studio to C++

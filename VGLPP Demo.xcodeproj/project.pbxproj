@@ -34,6 +34,9 @@
 		2774AA26192C32690015EB35 /* VGLPPObjLoaderDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2774AA24192C32690015EB35 /* VGLPPObjLoaderDemo.cpp */; };
 		27A7211D192EDCE5009D62AB /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27A7211B192EDCE5009D62AB /* Material.cpp */; };
 		27A72120192EE184009D62AB /* MaterialManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27A7211E192EE184009D62AB /* MaterialManager.cpp */; };
+		27A72123192EE70C009D62AB /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27A72121192EE70C009D62AB /* Entity.cpp */; };
+		27A72126192EE7C2009D62AB /* EntityModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27A72124192EE7C2009D62AB /* EntityModel.cpp */; };
+		27A72129192EE8A4009D62AB /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27A72127192EE8A4009D62AB /* Mesh.cpp */; };
 		27D5F6B8192AEA09003A1902 /* SolidColorShaderEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */; };
 		27F26202192C356400AD8D2A /* gouraud.fs in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27F261FB192C351800AD8D2A /* gouraud.fs */; };
 		27F26203192C356400AD8D2A /* gouraud.vs in Copy Resources */ = {isa = PBXBuildFile; fileRef = 27F261FC192C351800AD8D2A /* gouraud.vs */; };
@@ -143,6 +146,13 @@
 		27A7211C192EDCE5009D62AB /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
 		27A7211E192EE184009D62AB /* MaterialManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MaterialManager.cpp; sourceTree = "<group>"; };
 		27A7211F192EE184009D62AB /* MaterialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialManager.h; sourceTree = "<group>"; };
+		27A72121192EE70C009D62AB /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
+		27A72122192EE70C009D62AB /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		27A72124192EE7C2009D62AB /* EntityModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityModel.cpp; sourceTree = "<group>"; };
+		27A72125192EE7C2009D62AB /* EntityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityModel.h; sourceTree = "<group>"; };
+		27A72127192EE8A4009D62AB /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
+		27A72128192EE8A4009D62AB /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
+		27A7212A192EECDC009D62AB /* StringPathUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StringPathUtils.h; sourceTree = "<group>"; };
 		27D5F6B6192AEA09003A1902 /* SolidColorShaderEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = SolidColorShaderEffect.cpp; path = "VGLPP/vgl/VGL System Effects/SolidColorShaderEffect.cpp"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		27D5F6B7192AEA09003A1902 /* SolidColorShaderEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SolidColorShaderEffect.h; path = "VGLPP/vgl/VGL System Effects/SolidColorShaderEffect.h"; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		27F261FB192C351800AD8D2A /* gouraud.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = gouraud.fs; sourceTree = "<group>"; };
@@ -288,6 +298,12 @@
 				27A7211C192EDCE5009D62AB /* Material.h */,
 				27A7211E192EE184009D62AB /* MaterialManager.cpp */,
 				27A7211F192EE184009D62AB /* MaterialManager.h */,
+				27A72121192EE70C009D62AB /* Entity.cpp */,
+				27A72122192EE70C009D62AB /* Entity.h */,
+				27A72124192EE7C2009D62AB /* EntityModel.cpp */,
+				27A72125192EE7C2009D62AB /* EntityModel.h */,
+				27A72127192EE8A4009D62AB /* Mesh.cpp */,
+				27A72128192EE8A4009D62AB /* Mesh.h */,
 			);
 			path = vom;
 			sourceTree = "<group>";
@@ -308,6 +324,7 @@
 				273AD95F192951F800CCC07B /* MatTypes.cpp */,
 				273AD9631929521000CCC07B /* Quat.h */,
 				273AD9621929521000CCC07B /* Quat.cpp */,
+				27A7212A192EECDC009D62AB /* StringPathUtils.h */,
 			);
 			name = "c util";
 			sourceTree = "<group>";
@@ -386,14 +403,17 @@
 				276CE467192D7CDF00C33F47 /* TextureLoader.cpp in Sources */,
 				27D5F6B8192AEA09003A1902 /* SolidColorShaderEffect.cpp in Sources */,
 				273AD961192951F800CCC07B /* MatTypes.cpp in Sources */,
+				27A72129192EE8A4009D62AB /* Mesh.cpp in Sources */,
 				276CE464192D7A9D00C33F47 /* Texture2D.cpp in Sources */,
 				273AD97B1929739600CCC07B /* ShaderEffect.cpp in Sources */,
 				27A72120192EE184009D62AB /* MaterialManager.cpp in Sources */,
 				27A7211D192EDCE5009D62AB /* Material.cpp in Sources */,
 				273AD95B1929514800CCC07B /* System.cpp in Sources */,
 				273AD9411929489000CCC07B /* main.cpp in Sources */,
+				27A72126192EE7C2009D62AB /* EntityModel.cpp in Sources */,
 				273AD95E192951B400CCC07B /* StateMachine.cpp in Sources */,
 				273AD98119298DA300CCC07B /* GouraudShadingShaderEffect.cpp in Sources */,
+				27A72123192EE70C009D62AB /* Entity.cpp in Sources */,
 				273AD96F1929567600CCC07B /* EffectPropertyTexture.cpp in Sources */,
 				273AD97E1929752400CCC07B /* ShaderUniformInfo.cpp in Sources */,
 				273AD9641929521000CCC07B /* Quat.cpp in Sources */,
