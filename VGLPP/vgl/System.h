@@ -64,8 +64,7 @@ namespace vgl
     
     //This task stuff was put together to get me out of a bind, it's far from perfect
     
-    ///Schedule a task to occur on the main thread
-    ///currently there is no backbone mechanism to drain these
+    ///Schedule a task to occur on the main thread (this may someday be replaced by std::async stuff)
     void scheduleTask(Task t);
     
     ///Runs and drains the scheduled tasks queue for the main thread
