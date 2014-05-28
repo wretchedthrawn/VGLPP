@@ -144,6 +144,7 @@
 		276CE46C192D835B00C33F47 /* mountain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mountain.png; sourceTree = "<group>"; };
 		276CE46F192D866800C33F47 /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
 		276CE470192D866800C33F47 /* TextureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureManager.h; sourceTree = "<group>"; };
+		27735D7E1935A0E100953018 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		2774AA24192C32690015EB35 /* VGLPPObjLoaderDemo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VGLPPObjLoaderDemo.cpp; sourceTree = "<group>"; };
 		2774AA25192C32690015EB35 /* VGLPPObjLoaderDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VGLPPObjLoaderDemo.h; sourceTree = "<group>"; };
 		27A7211B192EDCE5009D62AB /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
@@ -248,6 +249,7 @@
 				273AD9661929548300CCC07B /* BaseState.h */,
 				273AD97C1929752400CCC07B /* ShaderUniformInfo.cpp */,
 				273AD97D1929752400CCC07B /* ShaderUniformInfo.h */,
+				27735D7E1935A0E100953018 /* Constants.h */,
 			);
 			path = vgl;
 			sourceTree = "<group>";

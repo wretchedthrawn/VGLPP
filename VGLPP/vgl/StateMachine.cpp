@@ -12,8 +12,6 @@
 //  using this software at YOUR OWN RISK.
 //
 
-#define _USE_MATH_DEFINES
-
 #include <iostream>
 #include <stdexcept>
 #include "StateMachine.h"
@@ -21,6 +19,7 @@
 #include "SolidColorShaderEffect.h"
 #include "GouraudShadingShaderEffect.h"
 #include "BaseState.h"
+#include "Constants.h"
 
 using namespace std;
 
@@ -28,8 +27,8 @@ namespace vgl
 {
   static StateMachine *constructingStateMachine = nullptr;
   
-  static inline float RAD(float n)  { return (n * (M_PI/180.0f)); }
-  //static inline float DEG(float n)  { return (n * (180.0f/M_PI)); }
+  static inline float RAD(float n)  { return (n * (MathConstants::PI/180.0f)); }
+  //static inline float DEG(float n)  { return (n * (180.0f/MathConstants::PI)); }
   
   static const float2 texRect[4] =
   {

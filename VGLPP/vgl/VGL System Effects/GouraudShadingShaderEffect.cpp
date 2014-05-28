@@ -12,14 +12,13 @@
 //  using this software at YOUR OWN RISK.
 //
 
-#define _USE_MATH_DEFINES
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <math.h>
 #include "GouraudShadingShaderEffect.h"
 #include "FastLightingShaderSource.h"
+#include "Constants.h"
 
 #if TARGET_OS_IPHONE
 #define MobileTarget()   1
@@ -31,7 +30,7 @@ using namespace std;
 
 namespace vgl
 {
-  static inline float RAD(float n)  { return (n * (M_PI/180.0f)); }
+  static inline float RAD(float n)  { return (n * (MathConstants::PI/180.0f)); }
 
   static string stringWithContentsOfFile(const string &file)
   {
