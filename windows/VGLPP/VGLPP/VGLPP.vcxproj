@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{970644CD-9A01-4A35-828E-05293FB111FC}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>VGLPP</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\VGLPP\vom;$(SolutionDir)..\..\VGLPP\vgl;$(SolutionDir)..\..\VGLPP\vgl\VGL System Effects\Effect Bases;$(SolutionDir)..\..\VGLPP\vgl\Effect Property Classes;$(SolutionDir)..\..\VGLPP\vgl\VGL System Effects;$(SolutionDir)..\..\VGLPP;$(SolutionDir)..\..\win frameworks\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\win frameworks\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y "$(SolutionDir)..\..\win frameworks\lib\x86\*.dll" "$(OutDir)" &amp; rd /s /q "$(OutDir)/vgl" &amp; rd /s /q "$(OutDir)/assets" &amp; mkdir "$(OutDir)/vgl/shaders" &amp;&amp; xcopy /y /s "$(SolutionDir)..\..\VGLPP\shaders" "$(OutDir)\vgl/shaders" &amp;&amp; mkdir "$(OutDir)/assets" &amp;&amp;  xcopy /y /s "$(SolutionDir)..\..\VGLPP Demo\assets" "$(OutDir)/assets"</Command>
+      <Message>You've got to be fucking kidding me with this shit!! &gt;-o</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\VGLPP Demo\VGLPPObjLoaderDemo.h" />
+    <ClInclude Include="..\..\..\VGLPP\MatTypes.h" />
+    <ClInclude Include="..\..\..\VGLPP\Quat.h" />
+    <ClInclude Include="..\..\..\VGLPP\StringPathUtils.h" />
+    <ClInclude Include="..\..\..\VGLPP\VecTypes.h" />
+    <ClInclude Include="..\..\..\VGLPP\vgl.h" />
+    <ClInclude Include="..\..\..\VGLPP\vgl\BaseState.h" />
+    <ClInclude Include="..\..\..\VGLPP\vgl\Effect Property Classes\EffectPropertyLight.h" />
+    <ClInclude Include="..\..\..\VGLPP\vgl\Effect Property Classes\EffectPropertyMaterial.h" />
+    <ClInclude Include="..\..\..\VGLPP\vgl\Effect Property Classes\EffectPropertyTexture.h" />
+    <ClInclude Include="..\..\..\VGLPP\vgl\Effect Property Classes\EffectPropertyTransform.h" />
+    <ClInclude Include="..\..\..\VGLPP\vgl\ShaderUniformInfo.h" />
+    <ClInclude Include="..\..\..\VGLPP\vgl\StateMachine.h" />
+    <ClInclude Include="..\..\..\VGLPP\vgl\System.h" />
+    <ClInclude Include="..\..\..\VGLPP\vgl\VGL System Effects\Effect Bases\ShaderEffect.h" />
+    <ClInclude Include="..\..\..\VGLPP\vgl\VGL System Effects\FastLightingShaderSource.h" />
+    <ClInclude Include="..\..\..\VGLPP\vgl\VGL System Effects\GouraudShadingShaderEffect.h" />
+    <ClInclude Include="..\..\..\VGLPP\vgl\VGL System Effects\SolidColorShaderEffect.h" />
+    <ClInclude Include="..\..\..\VGLPP\vom\Entity.h" />
+    <ClInclude Include="..\..\..\VGLPP\vom\EntityModel.h" />
+    <ClInclude Include="..\..\..\VGLPP\vom\Material.h" />
+    <ClInclude Include="..\..\..\VGLPP\vom\MaterialManager.h" />
+    <ClInclude Include="..\..\..\VGLPP\vom\Mesh.h" />
+    <ClInclude Include="..\..\..\VGLPP\vom\SDLTextureLoader.h" />
+    <ClInclude Include="..\..\..\VGLPP\vom\Texture2D.h" />
+    <ClInclude Include="..\..\..\VGLPP\vom\TextureLoader.h" />
+    <ClInclude Include="..\..\..\VGLPP\vom\TextureManager.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="VGLPP.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\VGLPP Demo\main.cpp" />
+    <ClCompile Include="..\..\..\VGLPP Demo\VGLPPObjLoaderDemo.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\MatTypes.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\Quat.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vgl\BaseState.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vgl\Effect Property Classes\EffectPropertyLight.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vgl\Effect Property Classes\EffectPropertyMaterial.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vgl\Effect Property Classes\EffectPropertyTexture.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vgl\Effect Property Classes\EffectPropertyTransform.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vgl\ShaderUniformInfo.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vgl\StateMachine.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vgl\System.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vgl\VGL System Effects\Effect Bases\ShaderEffect.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vgl\VGL System Effects\GouraudShadingShaderEffect.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vgl\VGL System Effects\SolidColorShaderEffect.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vom\Entity.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vom\EntityModel.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vom\Material.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vom\MaterialManager.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vom\Mesh.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vom\SDLTextureLoader.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vom\Texture2D.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vom\TextureLoader.cpp" />
+    <ClCompile Include="..\..\..\VGLPP\vom\TextureManager.cpp" />
+    <ClCompile Include="..\..\..\win frameworks\include\GL\gl_core_3_2.c" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="VGLPP.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico" />
+    <Image Include="VGLPP.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

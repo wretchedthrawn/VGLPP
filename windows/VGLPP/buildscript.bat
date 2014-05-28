@@ -1,0 +1,1 @@
+xcopy /y "$(SolutionDir)..\..\win frameworks\lib\x86\*.dll" "$(OutDir)"
