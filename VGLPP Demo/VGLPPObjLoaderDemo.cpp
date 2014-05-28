@@ -23,7 +23,7 @@
 #ifndef GL3_PROTOTYPES
 #define GL3_PROTOTYPES 1
 #endif
-#include <OpenGL/gl3.h>
+#include "vgl.h"
 
 using namespace std;
 
@@ -34,9 +34,7 @@ VGLPPObjLoaderDemo::VGLPPObjLoaderDemo()
   int flags[] = { 0, SDL_WINDOW_FULLSCREEN, SDL_WINDOW_FULLSCREEN_DESKTOP };
   
   SDL_Init(SDL_INIT_VIDEO);
-  
-  srandom((int)time(NULL));
-  
+    
   //OpenGL init params, we want a 3.2 core profile here
   //NOTE that only the absolute latest version of SDL2 will actually grant this 3.2 profile on mac
   SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
@@ -73,9 +71,21 @@ VGLPPObjLoaderDemo::VGLPPObjLoaderDemo()
     cerr <<  "Couldn't create OpenGL context: " << SDL_GetError() << endl;
     exit(2);
   }
+
+#ifdef WIN32
+  if(ogl_LoadFunctions() == ogl_LOAD_FAILED)
+  {
+	  MessageBox(NULL, L"OpenGL 3.2 on windows had a problem.  sorry man...", L"OpenGL 3.2 on windows had a problem.  sorry man...", MB_OK);
+	  exit(2);
+  }
+#endif
   
   cout << "Created OpenGL " << glGetString(GL_VERSION) << " context" << endl;
   glEnable(GL_DEPTH_TEST);
+
+  //show a nice black screen while loading (windows looks odd if we don't)
+  glClear(GL_COLOR_BUFFER_BIT);
+  SDL_GL_SwapWindow(window);
   
   SDL_GetWindowSize(window, &screenW, &screenH);
   SDL_GL_SetSwapInterval(1);

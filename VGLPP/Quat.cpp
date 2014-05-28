@@ -3,8 +3,10 @@
 
 //This is old code that I slosh around that'll probably never die....
 
+#define _USE_MATH_DEFINES
+
 #include <math.h>
-#import "Quat.h"
+#include "Quat.h"
 
 static float RAD(float n)  { return (n * (M_PI/180.0)); }
 

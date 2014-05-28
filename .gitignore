@@ -1,1 +1,5 @@
 VGLPP Demo.xcodeproj/xcuserdata/mike.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+windows/VGLPP/Debug/*
+windows/VGLPP/Release/*
+windows/VGLPP/VGLPP/Release/*
+windows/VGLPP/VGLPP/Debug/*

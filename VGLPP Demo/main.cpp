@@ -16,11 +16,11 @@
 #ifndef GL3_PROTOTYPES
 #define GL3_PROTOTYPES 1
 #endif
-#include <OpenGL/gl3.h>
+#include "vgl.h"
 
 using namespace std;
 
-int main(int argc, const char *argv[])
+int main(int argc, char *argv[])
 {
   auto demoApp = std::unique_ptr<VGLPPObjLoaderDemo>(new VGLPPObjLoaderDemo);
   

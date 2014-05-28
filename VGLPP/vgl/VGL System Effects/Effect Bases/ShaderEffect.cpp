@@ -15,6 +15,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <algorithm>
 #include <set>
 #include "ShaderEffect.h"
 #include "StateMachine.h"
@@ -31,7 +32,7 @@ namespace vgl
     //initially all 1's
     dirtyStateFlags = DS_ALL;
     
-    preLinkStep = 0;
+    preLinkStep = nullptr;
   }
   
   ShaderEffect::~ShaderEffect()

@@ -20,8 +20,8 @@
 #define __VGL_MATTYPES_H
 
 #include <math.h>
-#import "Quat.h"
-#import "VecTypes.h"
+#include "Quat.h"
+#include "VecTypes.h"
 
 /*
  m30, m31, and m32 correspond to the translation values tx, ty, and tz, respectively.

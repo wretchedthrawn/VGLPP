@@ -15,6 +15,7 @@
 #ifndef __VGLPP_Demo__TextureManager__
 #define __VGLPP_Demo__TextureManager__
 
+#include <memory>
 #include <string>
 #include <map>
 

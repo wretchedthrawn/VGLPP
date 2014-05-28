@@ -15,7 +15,14 @@
 #ifndef VGLPP_Demo_vgl_h
 #define VGLPP_Demo_vgl_h
 
+#ifdef WIN32
+#ifndef GL3_PROTOTYPES
+#define GL3_PROTOTYPES 1
+#endif
+#include "GL/gl_core_3_2.h"
+#else
 //this'll need to be changed on windows and ios
 #include <OpenGL/gl3.h>
+#endif
 
 #endif

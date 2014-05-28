@@ -12,6 +12,8 @@
 //  using this software at YOUR OWN RISK.
 //
 
+#define _USE_MATH_DEFINES
+
 #include <iostream>
 #include <stdexcept>
 #include "StateMachine.h"

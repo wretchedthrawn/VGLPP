@@ -12,6 +12,8 @@
 //  using this software at YOUR OWN RISK.
 //
 
+#define _USE_MATH_DEFINES
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -72,7 +74,7 @@ namespace vgl
       glBindAttribLocation(shaderProgramTex, VertexAttribTexCoord0, "texcoord0");
     });
     loadShaders(vertexVec, fragmentVec, &shaderProgramTex, &shadersTex);
-    preLinkStep = 0;
+    preLinkStep = nullptr;
     
     pointSize = 1.0f;
     

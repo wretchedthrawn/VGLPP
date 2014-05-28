@@ -16,6 +16,7 @@
 #include <fstream>
 #include <map>
 #include <stdexcept>
+#include <algorithm>
 #include "System.h"
 #include "StateMachine.h"
 #include "StringPathUtils.h"
@@ -116,7 +117,7 @@ namespace vom
         for(int q = 0; q < s->num_quad_inds; q+=4)
         {
           //emulate the quad as two triangles in a fan
-          glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (void *)(q*sizeof(uint)));
+          glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, (void *)(q*sizeof(unsigned int)));
         }
       }
       
@@ -147,14 +148,14 @@ namespace vom
     GLuint ind_vbo = 0;
     glGenBuffers(1, &ind_vbo);
     glBindBuffer(GL_ARRAY_BUFFER, ind_vbo);
-    glBufferData(GL_ARRAY_BUFFER, submesh->getNumInds()*sizeof(uint), h_ind+istart, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, submesh->getNumInds()*sizeof(unsigned int), h_ind+istart, GL_STATIC_DRAW);
     submesh->setIndVbo(ind_vbo);
     
     if(h_ind_quad)
     {
       glGenBuffers(1, &ind_vbo);
       glBindBuffer(GL_ARRAY_BUFFER, ind_vbo);
-      glBufferData(GL_ARRAY_BUFFER, submesh->getNumQuadInds()*sizeof(uint), h_ind_quad+istart_quad, GL_STATIC_DRAW);
+      glBufferData(GL_ARRAY_BUFFER, submesh->getNumQuadInds()*sizeof(unsigned int), h_ind_quad+istart_quad, GL_STATIC_DRAW);
       submesh->setQuadIndVbo(ind_vbo);
     }
     
@@ -245,8 +246,8 @@ namespace vom
       uint3 *h_ind;
       uint4 *h_ind_quad;
       
-      const uint maxVal = UINT_MAX;
-      uint verts_alloc_sz = min<uint>(maxVal, n_inds+n_inds_q+1);
+      const unsigned int maxVal = UINT_MAX;
+      unsigned int verts_alloc_sz = min<unsigned int>(maxVal, n_inds+n_inds_q+1);
       int num_inds = n_inds;
       
       num_verts = n_verts;

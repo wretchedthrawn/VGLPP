@@ -3,10 +3,15 @@
 
 //This is old code that I slosh around that'll probably never die....
 
-#import "VecTypes.h"
+#include "VecTypes.h"
 
 #ifdef __cplusplus
 extern "C" {
+#endif
+
+#ifdef WIN32
+#define __attribute__(...) 
+#define aligned(...)
 #endif
   
 union _QUAT
