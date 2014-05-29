@@ -5,3 +5,4 @@ windows/VGLPP/VGLPP/Release/*
 windows/VGLPP/VGLPP/Debug/*
 windows/VGLPP/ipch/*
 windows/VGLPP/*.sdf
+windows/VGLPP/*.opensdf
